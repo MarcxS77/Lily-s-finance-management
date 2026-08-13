@@ -21,7 +21,7 @@ export default function FamiliaPage() {
   const router             = useRouter();
   const supabase           = createClient();
 
-  const [familyName,      setFamilyName]      = useState("Nossa FamÃ­lia");
+  const [familyName,      setFamilyName]      = useState("Nossa Família");
   const [familyData,      setFamilyData]      = useState<{name:string;created_by:string}|null>(null);
   const [members,         setMembers]         = useState<MemberStat[]>([]);
   const [loadingFam,      setLoadingFam]      = useState(false);
@@ -50,7 +50,6 @@ export default function FamiliaPage() {
 
   useEffect(() => { loadFamily(); }, [loadFamily]);
 
-  // Countdown timer
   useEffect(() => {
     if (!invite) return;
     const tick = () => {
@@ -84,7 +83,7 @@ export default function FamiliaPage() {
   };
 
   const handleLeave = async () => {
-    if (!confirm("Tem certeza que quer sair da famÃ­lia?")) return;
+    if (!confirm("Tem certeza que quer sair da família?")) return;
     await leaveFamily(); router.refresh();
   };
 
@@ -103,29 +102,27 @@ export default function FamiliaPage() {
         borderBottom:`1px solid ${C.border}`, padding:"14px 18px 10px",
       }}>
         <div style={{ fontSize:10, color:C.pink, fontWeight:600, letterSpacing:"0.16em", marginBottom:2 }}>
-          FAMÃLIA
+          FAMÍLIA
         </div>
         <div style={{ fontSize:20, fontWeight:700 }}>
-          ðŸ  {familyData?.name || "Minha FamÃ­lia"}
+          🏠 {familyData?.name || "Minha Família"}
         </div>
       </header>
 
       <main style={{ padding:"18px 16px" }}>
-
         {!hasFamily ? (
-          /* â”€â”€ Sem famÃ­lia â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
           <>
             <div style={{
               background:`linear-gradient(150deg,#2a0a2a,${C.card})`,
               border:`1px solid ${C.pink}30`,
               borderRadius:20, padding:28, marginBottom:16, textAlign:"center",
             }}>
-              <div style={{ fontSize:52, marginBottom:12 }}>ðŸ </div>
+              <div style={{ fontSize:52, marginBottom:12 }}>🏠</div>
               <div style={{ fontSize:17, fontWeight:700, marginBottom:8 }}>
-                Crie ou entre em uma FamÃ­lia
+                Crie ou entre em uma Família
               </div>
               <div style={{ fontSize:13, color:C.sub, lineHeight:1.6 }}>
-                Junte-se com parceiro(a), famÃ­lia ou amigos para acompanhar as finanÃ§as do grupo.
+                Junte-se com parceiro(a), família ou amigos para acompanhar as finanças do grupo.
               </div>
             </div>
 
@@ -133,10 +130,8 @@ export default function FamiliaPage() {
               background:C.card, border:`1px solid ${C.border}`,
               borderRadius:20, padding:16, marginBottom:14,
             }}>
-              <div style={{ fontSize:14, fontWeight:700, marginBottom:12 }}>
-                Criar uma FamÃ­lia
-              </div>
-              <input type="text" placeholder="Ex: FamÃ­lia Silva"
+              <div style={{ fontSize:14, fontWeight:700, marginBottom:12 }}>Criar uma Família</div>
+              <input type="text" placeholder="Ex: Família Silva"
                 value={familyName} onChange={e => setFamilyName(e.target.value)}
                 style={{
                   width:"100%", background:C.raised, border:`1px solid ${C.border}`,
@@ -152,33 +147,30 @@ export default function FamiliaPage() {
                 fontSize:15, fontWeight:700, border:"none",
                 cursor:"pointer", fontFamily:"inherit",
               }}>
-                {creating ? "Criandoâ€¦" : "ðŸ  Criar FamÃ­lia"}
+                {creating ? "Criando…" : "🏠 Criar Família"}
               </button>
             </div>
 
             <div style={{ textAlign:"center", fontSize:12, color:C.muted }}>
-              ou peÃ§a um link de convite para alguÃ©m e acesse o link recebido
+              ou peça um link de convite para alguém e acesse o link recebido
             </div>
           </>
         ) : (
-          /* â”€â”€ Com famÃ­lia â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
           <>
-            {/* Resultado combinado */}
             <section style={{
               background:`linear-gradient(150deg,#2a0a2a,${C.card})`,
               border:`1px solid ${C.pink}30`,
               borderRadius:20, padding:16, marginBottom:14,
             }}>
               <div style={{ fontSize:13, fontWeight:700, color:C.pink, marginBottom:12 }}>
-                ðŸŒ¸ Resultado Familiar â€” {new Date().toLocaleDateString("pt-BR",{month:"long",year:"numeric"})}
+                🌸 Resultado Familiar — {new Date().toLocaleDateString("pt-BR",{month:"long",year:"numeric"})}
               </div>
-
               <div style={{ display:"grid", gridTemplateColumns:"1fr 1fr", gap:10, marginBottom:12 }}>
                 {[
-                  { label:"Entradas",  value:brl(famTotalIncome),                                     color:C.pink  },
-                  { label:"Gastos",    value:brl(famTotalSpent),                                      color:C.coral },
-                  { label:"Saldo",     value:(famBalance>=0?"+":"")+brl(famBalance),                  color:famBalance>=0?C.pink:C.coral },
-                  { label:"FÃºteis",   value:brl(famFutiles),                                          color:C.amber },
+                  { label:"Entradas", value:brl(famTotalIncome), color:C.pink  },
+                  { label:"Gastos",   value:brl(famTotalSpent),  color:C.coral },
+                  { label:"Saldo",    value:(famBalance>=0?"+":"")+brl(famBalance), color:famBalance>=0?C.pink:C.coral },
+                  { label:"Fúteis",   value:brl(famFutiles),     color:C.amber },
                 ].map(s => (
                   <div key={s.label} style={{
                     background:C.raised, borderRadius:14,
@@ -191,14 +183,10 @@ export default function FamiliaPage() {
                   </div>
                 ))}
               </div>
-
               {famTotalIncome > 0 && (
                 <div style={{ background:C.raised, borderRadius:12, padding:"10px 12px" }}>
-                  <div style={{
-                    display:"flex", justifyContent:"space-between",
-                    fontSize:11, color:C.sub, marginBottom:6,
-                  }}>
-                    <span>SaÃºde financeira familiar</span>
+                  <div style={{ display:"flex", justifyContent:"space-between", fontSize:11, color:C.sub, marginBottom:6 }}>
+                    <span>Saúde financeira familiar</span>
                     <span style={{ fontWeight:700, color:comprometido<70?C.pink:C.coral }}>
                       {comprometido.toFixed(0)}% comprometido
                     </span>
@@ -215,20 +203,18 @@ export default function FamiliaPage() {
               )}
             </section>
 
-            {/* Membros */}
             <div style={{ fontSize:15, fontWeight:700, marginBottom:12 }}>
-              ðŸ‘¥ Membros ({members.length})
+              👥 Membros ({members.length})
             </div>
 
             {loadingFam ? (
               <div style={{ textAlign:"center", padding:24, color:C.muted, fontSize:13 }}>
-                Carregando membrosâ€¦
+                Carregando membros…
               </div>
             ) : members.map(m => {
               const income  = m.income_entries + m.salary;
               const balance = income - m.spent;
               const contrib = famTotalSpent > 0 ? (m.spent / famTotalSpent) * 100 : 0;
-
               return (
                 <div key={m.id} style={{
                   background:C.card, border:`1px solid ${C.border}`,
@@ -249,63 +235,43 @@ export default function FamiliaPage() {
                     <div style={{ flex:1 }}>
                       <div style={{ fontSize:14, fontWeight:700 }}>
                         {m.name}
-                        {m.id === user.id && (
-                          <span style={{ fontSize:10, color:C.pink, marginLeft:6 }}>(vocÃª)</span>
-                        )}
-                        {m.id === familyData?.created_by && (
-                          <span style={{ fontSize:10, color:C.violet, marginLeft:6 }}>admin</span>
-                        )}
+                        {m.id === user.id && <span style={{ fontSize:10, color:C.pink, marginLeft:6 }}>(você)</span>}
+                        {m.id === familyData?.created_by && <span style={{ fontSize:10, color:C.violet, marginLeft:6 }}>admin</span>}
                       </div>
-                      <div style={{ fontSize:11, color:C.muted }}>
-                        {contrib.toFixed(0)}% dos gastos familiares
-                      </div>
+                      <div style={{ fontSize:11, color:C.muted }}>{contrib.toFixed(0)}% dos gastos familiares</div>
                     </div>
-                    <div style={{
-                      fontSize:13, fontWeight:700,
-                      color: balance >= 0 ? C.pink : C.coral,
-                    }}>
+                    <div style={{ fontSize:13, fontWeight:700, color: balance >= 0 ? C.pink : C.coral }}>
                       {balance >= 0 ? "+" : ""}{brl(balance)}
                     </div>
                   </div>
-
                   <div style={{ display:"grid", gridTemplateColumns:"1fr 1fr 1fr", gap:6, marginBottom:8 }}>
                     {[
                       { label:"Entradas", value:brl(income),   color:C.pink  },
                       { label:"Gastos",   value:brl(m.spent),  color:C.coral },
-                      { label:"FÃºteis",   value:brl(m.futile), color:C.amber },
+                      { label:"Fúteis",   value:brl(m.futile), color:C.amber },
                     ].map(s => (
-                      <div key={s.label} style={{
-                        background:C.raised, borderRadius:10,
-                        padding:"8px 6px", textAlign:"center",
-                      }}>
+                      <div key={s.label} style={{ background:C.raised, borderRadius:10, padding:"8px 6px", textAlign:"center" }}>
                         <div style={{ fontSize:9, color:C.muted, marginBottom:2 }}>{s.label}</div>
                         <div style={{ fontSize:11, fontWeight:700, color:s.color }}>{s.value}</div>
                       </div>
                     ))}
                   </div>
-
-                  {/* Barra de contribuiÃ§Ã£o */}
                   <div style={{ height:3, background:C.border, borderRadius:3 }}>
-                    <div style={{
-                      height:3, borderRadius:3, background:C.pink, opacity:0.5,
-                      width:`${contrib}%`, transition:"width 1s ease",
-                    }} />
+                    <div style={{ height:3, borderRadius:3, background:C.pink, opacity:0.5, width:`${contrib}%`, transition:"width 1s ease" }} />
                   </div>
                 </div>
               );
             })}
 
-            {/* Convite â€” sÃ³ para admin */}
             {isAdmin && (
               <section style={{
                 background:`${C.pink}08`, border:`1px solid ${C.pink}25`,
                 borderRadius:20, padding:16, marginTop:8, marginBottom:14,
               }}>
-                <div style={{ fontSize:14, fontWeight:700, marginBottom:4 }}>ðŸ”— Convidar Membros</div>
+                <div style={{ fontSize:14, fontWeight:700, marginBottom:4 }}>🔗 Convidar Membros</div>
                 <div style={{ fontSize:11, color:C.muted, marginBottom:14 }}>
                   Gere um link com validade de 15 minutos
                 </div>
-
                 {!invite ? (
                   <button onClick={handleGenerateInvite} disabled={generatingInvite} style={{
                     width:"100%",
@@ -314,11 +280,10 @@ export default function FamiliaPage() {
                     fontSize:14, fontWeight:700, border:"none",
                     cursor:"pointer", fontFamily:"inherit",
                   }}>
-                    {generatingInvite ? "Gerandoâ€¦" : "ðŸ”— Gerar Link de Convite"}
+                    {generatingInvite ? "Gerando…" : "🔗 Gerar Link de Convite"}
                   </button>
                 ) : (
                   <>
-                    {/* Link */}
                     <div style={{
                       background:C.raised, border:`1px solid ${C.border}`,
                       borderRadius:12, padding:"10px 14px",
@@ -326,10 +291,7 @@ export default function FamiliaPage() {
                     }}>
                       <div style={{ flex:1, minWidth:0 }}>
                         <div style={{ fontSize:9, color:C.muted, marginBottom:3 }}>Link de convite</div>
-                        <div style={{
-                          fontSize:11, color:C.pink,
-                          overflow:"hidden", textOverflow:"ellipsis", whiteSpace:"nowrap",
-                        }}>
+                        <div style={{ fontSize:11, color:C.pink, overflow:"hidden", textOverflow:"ellipsis", whiteSpace:"nowrap" }}>
                           {typeof window !== "undefined" ? window.location.origin : ""}/join/{invite.token}
                         </div>
                       </div>
@@ -341,23 +303,19 @@ export default function FamiliaPage() {
                         cursor:"pointer", fontFamily:"inherit", flexShrink:0,
                         transition:"all .2s",
                       }}>
-                        {copied ? "âœ“ Copiado!" : "Copiar"}
+                        {copied ? "✓ Copiado!" : "Copiar"}
                       </button>
                     </div>
-
-                    {/* Countdown */}
                     <div style={{ textAlign:"center", marginBottom:8 }}>
                       <div style={{
                         fontSize:32, fontWeight:700,
                         color: timeLeft > 120 ? C.pink : timeLeft > 30 ? C.amber : C.coral,
                         fontFamily:"monospace", letterSpacing:"0.05em",
-                        transition:"color .5s",
                       }}>
                         {fmt(timeLeft)}
                       </div>
                       <div style={{ fontSize:11, color:C.muted }}>para expirar</div>
                     </div>
-
                     <div style={{ height:4, background:C.border, borderRadius:4, marginBottom:10 }}>
                       <div style={{
                         height:4, borderRadius:4,
@@ -366,7 +324,6 @@ export default function FamiliaPage() {
                         transition:"width 1s linear, background .5s",
                       }} />
                     </div>
-
                     <button onClick={handleGenerateInvite} style={{
                       width:"100%", background:"none",
                       border:`1px solid ${C.border}`,
@@ -380,14 +337,13 @@ export default function FamiliaPage() {
               </section>
             )}
 
-            {/* Sair */}
             <button onClick={handleLeave} style={{
               width:"100%", background:"none",
               border:`1px solid ${C.border}`,
               color:C.muted, borderRadius:14, padding:13,
               fontSize:13, cursor:"pointer", fontFamily:"inherit",
             }}>
-              Sair da famÃ­lia
+              Sair da família
             </button>
           </>
         )}
@@ -395,4 +351,3 @@ export default function FamiliaPage() {
     </>
   );
 }
-
