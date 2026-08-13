@@ -1,99 +1,95 @@
-import type { Category, Badge } from "@/types/database";
+"use client";
 
-export const C = {
-  bg:       "#0E0812",
-  card:     "#1C0E1C",
-  raised:   "#280F28",
-  border:   "#3D1A3D",
-  pink:     "#F9A8D4",
-  pinkDk:   "#EC4899",
-  pinkMd:   "#F472B6",
-  amber:    "#F5A623",
-  coral:    "#FF6B6B",
-  violet:   "#E879F9",
-  violetDk: "#C026D3",
-  blue:     "#60A5FA",
-  text:     "#FDF2F8",
-  sub:      "#C084A0",
-  muted:    "#6B2D4F",
-} as const;
+import { createClient } from "@/lib/supabase/client";
+import { useState } from "react";
+import { C, APP_NAME, APP_EMOJI } from "@/lib/constants";
 
-export const APP_NAME = "Lilys";
-export const APP_EMOJI = "🌸";
-
-export const CATEGORIES: Category[] = [
-  { id:"alimentacao", label:"Alimentação",  emoji:"🍔", color:"#FF6B6B", futile:false },
-  { id:"transporte",  label:"Transporte",   emoji:"🚗", color:"#FBBF24", futile:false },
-  { id:"moradia",     label:"Moradia",      emoji:"🏠", color:"#60A5FA", futile:false },
-  { id:"saude",       label:"Saúde",        emoji:"💊", color:"#34D399", futile:false },
-  { id:"educacao",    label:"Educação",     emoji:"📚", color:"#22D3EE", futile:false },
-  { id:"contas",      label:"Contas",       emoji:"⚡", color:"#F59E0B", futile:false },
-  { id:"lazer",       label:"Lazer",        emoji:"🎬", color:"#A78BFA", futile:true  },
-  { id:"roupas",      label:"Roupas",       emoji:"👗", color:"#F9A8D4", futile:true  },
-  { id:"compras",     label:"Compras",      emoji:"🛒", color:"#FB7185", futile:true  },
-  { id:"bar",         label:"Bar/Balada",   emoji:"🍹", color:"#86EFAC", futile:true  },
-  { id:"cafe",        label:"Café/Lanches", emoji:"☕", color:"#C084FC", futile:true  },
-  { id:"games",       label:"Games/Apps",   emoji:"🎮", color:"#FB923C", futile:true  },
+const FEATURES = [
+  { emoji:"🌸", text:"Dashboard de saúde financeira personalizado" },
+  { emoji:"📊", text:"Análise de gastos fúteis e essenciais"       },
+  { emoji:"🏆", text:"Sistema de conquistas e gamificação"          },
+  { emoji:"💰", text:"Controle de entradas e saídas do mês"         },
 ];
 
-export const INCOME_CATS = [
-  { id:"salario",      label:"Salário",         emoji:"💼" },
-  { id:"freelance",    label:"Freelance",       emoji:"💻" },
-  { id:"investimento", label:"Investimentos",   emoji:"📈" },
-  { id:"presente",     label:"Presente",        emoji:"🎁" },
-  { id:"aluguel",      label:"Aluguel recebido",emoji:"🏠" },
-  { id:"outro",        label:"Outro",           emoji:"➕" },
-];
+export default function LoginPage() {
+  const [loading, setLoading] = useState(false);
+  const supabase = createClient();
 
-export const getCat = (id: string) =>
-  CATEGORIES.find(c => c.id === id) ?? CATEGORIES[0];
+  const handleGoogle = async () => {
+    setLoading(true);
+    await supabase.auth.signInWithOAuth({
+      provider: "google",
+      options: {
+        redirectTo: `${window.location.origin}/auth/callback`,
+        queryParams: { access_type: "offline", prompt: "consent" },
+      },
+    });
+  };
 
-export const getIncomeCat = (id: string) =>
-  INCOME_CATS.find(c => c.id === id) ?? INCOME_CATS[INCOME_CATS.length - 1];
+  return (
+    <div style={{
+      minHeight:"100dvh", background:C.bg,
+      display:"flex", flexDirection:"column",
+      alignItems:"center", justifyContent:"center",
+      padding:"0 28px", color:C.text,
+      fontFamily:"'Space Grotesk', system-ui, sans-serif",
+    }}>
+      <div style={{ textAlign:"center", marginBottom:48 }}>
+        <div style={{ fontSize:72, marginBottom:12, lineHeight:1 }}>{APP_EMOJI}</div>
+        <h1 style={{ fontSize:40, fontWeight:700, margin:"0 0 8px", color:C.pink }}>
+          {APP_NAME}
+        </h1>
+        <p style={{ fontSize:15, color:C.sub, margin:0, lineHeight:1.6 }}>
+          Sua jornada para a<br/>maturidade financeira
+        </p>
+      </div>
 
-export const BADGES: Badge[] = [
-  { id:"first_entry",   emoji:"📝", title:"Primeiro Passo",    desc:"Cadastrou o primeiro gasto",            xp:50  },
-  { id:"first_income",  emoji:"💰", title:"Primeira Entrada",  desc:"Registrou sua primeira receita",        xp:50  },
-  { id:"streak_7",      emoji:"🔥", title:"7 Dias de Fogo",    desc:"7 dias consecutivos registrando",       xp:100 },
-  { id:"streak_14",     emoji:"⚡", title:"14 Dias Imparável", desc:"14 dias consecutivos registrando",      xp:200 },
-  { id:"streak_30",     emoji:"🌕", title:"Mês Completo",      desc:"30 dias consecutivos registrando",      xp:400 },
-  { id:"goal_hit",      emoji:"🎯", title:"Meta Atingida",     desc:"Ficou abaixo do orçamento no mês",      xp:250 },
-  { id:"cut_futile_20", emoji:"✂️", title:"Corte Inteligente", desc:"Reduziu gastos fúteis em 20%",          xp:150 },
-  { id:"positive_bal",  emoji:"🌸", title:"Saldo Positivo",    desc:"Fechou o mês com saldo positivo",       xp:300 },
-  { id:"investor",      emoji:"📈", title:"Investidora",       desc:"Registrou entrada de investimento",     xp:200 },
-  { id:"perfect_month", emoji:"⭐", title:"Mês Perfeito",      desc:"Todas categorias abaixo do orçamento",  xp:500 },
-  { id:"tx_50",         emoji:"🎓", title:"Organizadora Pro",  desc:"Classificou 50 transações",             xp:100 },
-  { id:"diamond_3",     emoji:"💎", title:"Diamante",          desc:"3 meses consecutivos com meta batida",  xp:600 },
-];
+      <div style={{
+        width:"100%", maxWidth:340,
+        background:C.card, borderRadius:20,
+        border:`1px solid ${C.border}`,
+        padding:"4px 20px", marginBottom:32,
+      }}>
+        {FEATURES.map((f, i) => (
+          <div key={f.text} style={{
+            display:"flex", alignItems:"center", gap:12,
+            padding:"14px 0",
+            borderBottom: i < FEATURES.length - 1 ? `1px solid ${C.border}` : "none",
+          }}>
+            <span style={{ fontSize:20, flexShrink:0 }}>{f.emoji}</span>
+            <span style={{ fontSize:13, color:C.sub, lineHeight:1.4 }}>{f.text}</span>
+          </div>
+        ))}
+      </div>
 
-export const LEVELS = [
-  { name:"Iniciante",       icon:"🌱", minXP:0    },
-  { name:"Aprendiz",        icon:"🌸", minXP:200  },
-  { name:"Consciente",      icon:"👁️",  minXP:500  },
-  { name:"Planejadora",     icon:"📋", minXP:900  },
-  { name:"Estrategista",    icon:"🧩", minXP:1400 },
-  { name:"Especialista",    icon:"💎", minXP:2000 },
-  { name:"Mestre",          icon:"🏅", minXP:2800 },
-  { name:"Guru Financeira", icon:"🌟", minXP:3800 },
-];
+      <button onClick={handleGoogle} disabled={loading} style={{
+        width:"100%", maxWidth:340,
+        display:"flex", alignItems:"center", justifyContent:"center", gap:12,
+        background:"#ffffff", color:"#1a1a1a",
+        borderRadius:16, padding:"15px 24px",
+        fontSize:16, fontWeight:600,
+        border:"none", cursor:loading ? "wait" : "pointer",
+        fontFamily:"inherit", opacity:loading ? 0.75 : 1,
+        boxShadow:"0 4px 24px rgba(0,0,0,0.4)",
+      }}>
+        {loading ? "Conectando..." : <><GoogleIcon /> Entrar com Google</>}
+      </button>
 
-export function getLevelInfo(xp: number) {
-  let lvlIdx = 0;
-  for (let i = LEVELS.length - 1; i >= 0; i--) {
-    if (xp >= LEVELS[i].minXP) { lvlIdx = i; break; }
-  }
-  const current    = LEVELS[lvlIdx];
-  const next       = LEVELS[lvlIdx + 1];
-  const progressXP = xp - current.minXP;
-  const neededXP   = next ? next.minXP - current.minXP : progressXP;
-  const pct        = Math.min((progressXP / neededXP) * 100, 100);
-  return { lvlIdx, current, next, progressXP, neededXP, pct };
+      <p style={{ fontSize:11, color:C.muted, marginTop:20, textAlign:"center", lineHeight:1.6 }}>
+        Seus dados são privados e protegidos.<br/>
+        Nunca compartilhamos com terceiros.
+      </p>
+    </div>
+  );
 }
 
-export const brl = (n: number | undefined | null) =>
-  "R$ " + (n ?? 0).toFixed(2).replace(".", ",").replace(/\B(?=(\d{3})+(?!\d))/g, ".");
-
-export const fmtDate = (iso: string) => {
-  const d = new Date(iso + "T12:00:00");
-  return d.toLocaleDateString("pt-BR", { day:"2-digit", month:"2-digit" });
-};
+function GoogleIcon() {
+  return (
+    <svg width="20" height="20" viewBox="0 0 24 24" aria-hidden>
+      <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/>
+      <path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/>
+      <path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05"/>
+      <path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/>
+    </svg>
+  );
+}
