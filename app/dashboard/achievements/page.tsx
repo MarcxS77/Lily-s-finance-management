@@ -25,14 +25,13 @@ export default function AchievementsPage() {
         <div style={{ fontSize:10, color:C.violet, fontWeight:600, letterSpacing:"0.16em", marginBottom:2 }}>
           CONQUISTAS
         </div>
-        <div style={{ fontSize:20, fontWeight:700 }}>ðŸ† Sua EvoluÃ§Ã£o</div>
+        <div style={{ fontSize:20, fontWeight:700 }}>🏆 Sua Evolução</div>
       </header>
 
       <main style={{ padding:"18px 16px" }}>
 
-        {/* Level card */}
         <section style={{
-          background:"linear-gradient(150deg,#1a0f40,#0C1929 70%)",
+          background:`linear-gradient(150deg,#1a0f40,#0C1929 70%)`,
           border:`1px solid ${C.violet}45`,
           borderRadius:22, padding:20, marginBottom:14,
         }}>
@@ -46,19 +45,19 @@ export default function AchievementsPage() {
               <div style={{
                 fontSize:10, color:C.violet, fontWeight:600,
                 letterSpacing:"0.13em", textTransform:"uppercase",
-              }}>NÃ­vel {levelInfo.lvlIdx + 1}</div>
+              }}>Nível {levelInfo.lvlIdx + 1}</div>
               <div style={{ fontSize:20, fontWeight:700, lineHeight:1.2 }}>
                 {currentLevel.name}
               </div>
               <div style={{ fontSize:11, color:C.sub, marginTop:2 }}>
-                {xp} XP total Â· {unlockedBadges.length}/{BADGES.length} conquistas
+                {xp} XP total · {unlockedBadges.length}/{BADGES.length} conquistas
               </div>
             </div>
           </div>
 
           <div style={{ fontSize:11, color:C.sub, display:"flex", justifyContent:"space-between", marginBottom:6 }}>
             <span>
-              {nextLevel ? `Progresso para ${nextLevel.name}` : "NÃ­vel mÃ¡ximo atingido! ðŸŒŸ"}
+              {nextLevel ? `Progresso para ${nextLevel.name}` : "Nível máximo atingido! 🌟"}
             </span>
             {nextLevel && (
               <span style={{ color:C.violet, fontWeight:600 }}>
@@ -79,9 +78,9 @@ export default function AchievementsPage() {
 
           <div style={{ display:"grid", gridTemplateColumns:"1fr 1fr 1fr", gap:8, marginTop:14 }}>
             {[
-              { label:"Total XP",    value:xp                  },
+              { label:"Total XP",    value:xp },
               { label:"Badges",      value:`${unlockedBadges.length}/${BADGES.length}` },
-              { label:"PrÃ³x. nÃ­vel", value: nextLevel ? `${levelInfo.neededXP - levelInfo.progressXP} XP` : "MAX" },
+              { label:"Próx. nível", value: nextLevel ? `${levelInfo.neededXP - levelInfo.progressXP} XP` : "MAX" },
             ].map(s => (
               <div key={s.label} style={{
                 background:`${C.violet}10`, borderRadius:12,
@@ -98,16 +97,15 @@ export default function AchievementsPage() {
           </div>
         </section>
 
-        {/* Streak calendar */}
         <section style={{
           background:C.card, borderRadius:20,
           border:`1px solid ${C.border}`,
           padding:16, marginBottom:14,
         }}>
-          <h2 style={{ fontSize:15, fontWeight:700, margin:"0 0 4px" }}>ðŸ”¥ SequÃªncia de Registros</h2>
-          <p style={{ fontSize:11, color:C.sub, margin:"0 0 12px" }}>
-            {streak} dias ativos Â· Recorde: {streakRecord} dias
-          </p>
+          <div style={{ fontSize:15, fontWeight:700, marginBottom:4 }}>🔥 Sequência de Registros</div>
+          <div style={{ fontSize:11, color:C.sub, marginBottom:12 }}>
+            {streak} dias ativos · Recorde: {streakRecord} dias
+          </div>
           <div style={{ display:"flex", flexWrap:"wrap", gap:4 }}>
             {Array.from({ length:Math.min(streak + 10, 31) }, (_, i) => (
               <div key={i} style={{
@@ -124,12 +122,11 @@ export default function AchievementsPage() {
           </div>
           {streak === 0 && (
             <p style={{ fontSize:12, color:C.muted, margin:"8px 0 0", textAlign:"center" }}>
-              Adicione seu primeiro gasto para iniciar a sequÃªncia! ðŸš€
+              Adicione seu primeiro gasto para iniciar a sequência! 🚀
             </p>
           )}
         </section>
 
-        {/* Unlocked badges */}
         {unlockedBadges.length > 0 && (
           <>
             <div style={{
@@ -141,7 +138,7 @@ export default function AchievementsPage() {
             <div style={{ display:"grid", gridTemplateColumns:"1fr 1fr", gap:10, marginBottom:14 }}>
               {unlockedBadges.map(b => (
                 <div key={b.id} style={{
-                  background:"linear-gradient(145deg,#0b1a0f,#0C1929)",
+                  background:`linear-gradient(145deg,#0b1a0f,${C.card})`,
                   border:`1px solid ${C.pink}35`,
                   borderRadius:16, padding:14,
                   transition:"transform .2s",
@@ -161,7 +158,6 @@ export default function AchievementsPage() {
           </>
         )}
 
-        {/* Locked badges */}
         {lockedBadges.length > 0 && (
           <>
             <div style={{
@@ -180,7 +176,7 @@ export default function AchievementsPage() {
                   <div style={{ fontSize:13, fontWeight:700, color:C.sub }}>{b.title}</div>
                   <div style={{ fontSize:11, color:C.muted, marginTop:2, lineHeight:1.3 }}>{b.desc}</div>
                   <div style={{ marginTop:8, fontSize:11, fontWeight:600, color:C.muted }}>
-                    +{b.xp} XP ðŸ”’
+                    +{b.xp} XP 🔒
                   </div>
                 </div>
               ))}
@@ -191,4 +187,3 @@ export default function AchievementsPage() {
     </>
   );
 }
-
