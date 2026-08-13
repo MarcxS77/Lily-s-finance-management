@@ -8,7 +8,7 @@
           display_name:   string | null;
           avatar_url:     string | null;
           monthly_budget: number;
-          salary: number; family_id: string | null;
+          salary: number; family_id: string | null; family_id: string | null;
           streak_days:    number;
           streak_record:  number;
           last_entry_date:string | null;
@@ -148,4 +148,5 @@ export type Badge = {
 };
 
 export type CategoryData = Category & { value: number };
+
 
