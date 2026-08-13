@@ -85,7 +85,7 @@ td{padding:8px 10px;border-bottom:1px solid #f9f0f9;font-size:12px}
 <table><tr><th>Categoria</th><th align="right">Valor</th><th align="right">%</th><th align="center">Tipo</th></tr>
 ${catRows}
 <tr style="background:#fdf0f7;font-weight:700"><td>Total</td><td align="right">${brl(total)}</td><td></td><td></td></tr></table>
-${summaries.length > 0 ? `<div class="st">Historico Mensal</div><table><tr><th>Mes</th><th align="right">Entradas</th><th align="right">Gastos</th><th align="right">Saldo</th><th align="right">Poupanca</th></tr>${sumRows}</table>` : ""}
+${summaries.length > 0 ? `<div class="st">Histórico Mensal</div><table><tr><th>Mes</th><th align="right">Entradas</th><th align="right">Gastos</th><th align="right">Saldo</th><th align="right">Poupanca</th></tr>${sumRows}</table>` : ""}
 <div class="ft">Gerado pelo Lilys - ${new Date().toLocaleDateString("pt-BR")}</div>
 </body></html>`;
 
@@ -98,8 +98,8 @@ ${summaries.length > 0 ? `<div class="st">Historico Mensal</div><table><tr><th>M
       <header style={{position:"sticky",top:0,zIndex:50,background:`${C.bg}ee`,backdropFilter:"blur(14px)",borderBottom:`1px solid ${C.border}`,padding:"14px 18px 10px"}}>
         <div style={{display:"flex",alignItems:"center",justifyContent:"space-between"}}>
           <div>
-            <div style={{fontSize:10,color:C.pink,fontWeight:600,letterSpacing:"0.16em",marginBottom:2}}>ANALISE</div>
-            <div style={{fontSize:20,fontWeight:700}}>Seus Numeros</div>
+            <div style={{fontSize:10,color:C.pink,fontWeight:600,letterSpacing:"0.16em",marginBottom:2}}>ANÁLISE</div>
+            <div style={{fontSize:20,fontWeight:700}}>Seus Números</div>
           </div>
           <button onClick={handlePDF} style={{background:`${C.pink}15`,border:`1px solid ${C.pink}40`,borderRadius:12,padding:"8px 14px",fontSize:12,fontWeight:600,color:C.pink,cursor:"pointer",fontFamily:"inherit"}}>
             Exportar PDF
@@ -110,7 +110,7 @@ ${summaries.length > 0 ? `<div class="st">Historico Mensal</div><table><tr><th>M
       <main style={{padding:"18px 16px"}} suppressHydrationWarning>
 
         <section style={{background:`linear-gradient(150deg,#2a0a2a,${C.card})`,border:`1px solid ${C.pink}30`,borderRadius:20,padding:16,marginBottom:14}}>
-          <div style={{fontSize:13,fontWeight:700,color:C.pink,marginBottom:12}}>Resumo do Mes</div>
+          <div style={{fontSize:13,fontWeight:700,color:C.pink,marginBottom:12}}>Resumo do Mês</div>
           <div style={{display:"grid",gridTemplateColumns:"1fr 1fr",gap:10,marginBottom:12}}>
             {[
               {label:"Entradas",  value:brl(totalIncome),                         color:C.pink },
@@ -127,7 +127,7 @@ ${summaries.length > 0 ? `<div class="st">Historico Mensal</div><table><tr><th>M
           {totalIncome > 0 && (
             <div style={{background:C.raised,borderRadius:12,padding:"10px 12px"}}>
               <div style={{display:"flex",justifyContent:"space-between",fontSize:11,color:C.sub,marginBottom:6}}>
-                <span>Taxa de poupanca</span>
+                <span>Taxa de poupança</span>
                 <span style={{fontWeight:700,color:savingsRate>=20?C.pink:savingsRate>=0?C.amber:C.coral}}>{savingsRate.toFixed(1)}%</span>
               </div>
               <div style={{height:6,background:C.border,borderRadius:6}}>
@@ -151,7 +151,7 @@ ${summaries.length > 0 ? `<div class="st">Historico Mensal</div><table><tr><th>M
 
         {savingsLine.length > 1 && (
           <section style={{background:C.card,borderRadius:20,border:`1px solid ${C.border}`,padding:16,marginBottom:14}}>
-            <div style={{fontSize:15,fontWeight:700,marginBottom:4}}>Evolucao da Taxa de Poupanca</div>
+            <div style={{fontSize:15,fontWeight:700,marginBottom:4}}>Evolucao da Taxa de poupança</div>
             <div style={{fontSize:11,color:C.sub,marginBottom:16}}>% das entradas economizado por mes</div>
             <ResponsiveContainer width="100%" height={180}>
               <LineChart data={savingsLine}>
@@ -202,7 +202,7 @@ ${summaries.length > 0 ? `<div class="st">Historico Mensal</div><table><tr><th>M
 
         {chartMonths.length > 0 && (
           <section style={{background:C.card,borderRadius:20,border:`1px solid ${C.border}`,padding:16,marginBottom:14}}>
-            <div style={{fontSize:15,fontWeight:700,marginBottom:14}}>Evolucao Mensal</div>
+            <div style={{fontSize:15,fontWeight:700,marginBottom:14}}>Evolução Mensal</div>
             <ResponsiveContainer width="100%" height={170}>
               <BarChart data={chartMonths} barGap={2} barCategoryGap="25%">
                 <XAxis dataKey="month" tick={{fill:C.sub,fontSize:10}} axisLine={false} tickLine={false}/>
@@ -218,7 +218,7 @@ ${summaries.length > 0 ? `<div class="st">Historico Mensal</div><table><tr><th>M
 
         {summaries.length > 0 && (
           <section style={{marginBottom:14}}>
-            <div style={{fontSize:15,fontWeight:700,marginBottom:12}}>Historico Mensal</div>
+            <div style={{fontSize:15,fontWeight:700,marginBottom:12}}>Histórico Mensal</div>
             {[...summaries].map(s => {
               const inc  = s.total_income + salary;
               const bal  = inc - s.total_spent;
