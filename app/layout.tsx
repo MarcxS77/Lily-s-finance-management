@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Lilys â€” Maturidade Financeira",
+  title: "Lilys” Maturidade Financeira",
   description: "Controle seus gastos, entradas e conquiste sua independÃªncia financeira.",
 };
 
