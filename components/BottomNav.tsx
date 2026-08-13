@@ -8,23 +8,23 @@ import { C } from "@/lib/constants";
 import { AddTransactionModal } from "./AddTransactionModal";
 import { ProfileModal } from "./ProfileModal";
 
-type Tab = {
-  href:   string;
-  label:  string;
-  Icon:   React.ComponentType<{ size: number; weight: "fill" | "regular" }>;
-};
-
-const TABS: Tab[] = [
-  { href:"/dashboard",              label:"InÃ­cio",    Icon:House    },
-  { href:"/dashboard/analytics",    label:"AnÃ¡lise",   Icon:ChartBar },
-  { href:"/dashboard/familia",      label:"FamÃ­lia",   Icon:Users    },
-  { href:"/dashboard/achievements", label:"Conquistas",Icon:Trophy   },
-];
-
 export function BottomNav() {
   const path = usePathname();
   const [showAdd,     setShowAdd]     = useState(false);
   const [showProfile, setShowProfile] = useState(false);
+
+  const linkStyle = (href: string) => ({
+    flex:1 as const, height:54, textDecoration:"none" as const,
+    display:"flex" as const, flexDirection:"column" as const,
+    alignItems:"center" as const, justifyContent:"center" as const,
+    gap:3, color: path === href ? C.pink : C.muted,
+    transition:"color .2s",
+  });
+
+  const labelStyle = {
+    fontSize:9, fontWeight:600,
+    fontFamily:"'Space Grotesk', sans-serif",
+  };
 
   return (
     <>
@@ -37,24 +37,16 @@ export function BottomNav() {
         height:64, display:"flex", alignItems:"center", padding:"0 4px",
       }}>
 
-        {TABS.slice(0,2).map(tab => {
-          const active = path === tab.href;
-          return (
-            <Link key={tab.href} href={tab.href} style={{
-              flex:1, height:54, textDecoration:"none",
-              display:"flex", flexDirection:"column",
-              alignItems:"center", justifyContent:"center", gap:3,
-              color: active ? C.pink : C.muted, transition:"color .2s",
-            }}>
-              <tab.Icon size={22} weight={active ? "fill" : "regular"} />
-              <span style={{ fontSize:9, fontWeight:600, fontFamily:"'Space Grotesk',sans-serif" }}>
-                {tab.label}
-              </span>
-            </Link>
-          );
-        })}
+        <Link href="/dashboard" style={linkStyle("/dashboard")}>
+          <House size={22} weight={path === "/dashboard" ? "fill" : "regular"} />
+          <span style={labelStyle}>Início</span>
+        </Link>
 
-        {/* BotÃ£o central â€” Adicionar */}
+        <Link href="/dashboard/analytics" style={linkStyle("/dashboard/analytics")}>
+          <ChartBar size={22} weight={path === "/dashboard/analytics" ? "fill" : "regular"} />
+          <span style={labelStyle}>Análise</span>
+        </Link>
+
         <button onClick={() => setShowAdd(true)} aria-label="Adicionar"
           style={{
             flex:1, height:48,
@@ -63,42 +55,31 @@ export function BottomNav() {
             alignItems:"center", justifyContent:"center",
             border:"none", cursor:"pointer",
             margin:"0 4px", boxShadow:`0 4px 16px ${C.pink}45`,
-            fontFamily:"inherit", fontSize:20, color:C.bg, fontWeight:700,
+            fontFamily:"inherit", fontSize:22, color:C.bg, fontWeight:700,
           }}>
-          âœ¦
+          +
         </button>
 
-        {TABS.slice(2,4).map(tab => {
-          const active = path === tab.href;
-          return (
-            <Link key={tab.href} href={tab.href} style={{
-              flex:1, height:54, textDecoration:"none",
-              display:"flex", flexDirection:"column",
-              alignItems:"center", justifyContent:"center", gap:3,
-              color: active ? C.pink : C.muted, transition:"color .2s",
-            }}>
-              <tab.Icon size={22} weight={active ? "fill" : "regular"} />
-              <span style={{ fontSize:9, fontWeight:600, fontFamily:"'Space Grotesk',sans-serif" }}>
-                {tab.label}
-              </span>
-            </Link>
-          );
-        })}
+        <Link href="/dashboard/familia" style={linkStyle("/dashboard/familia")}>
+          <Users size={22} weight={path === "/dashboard/familia" ? "fill" : "regular"} />
+          <span style={labelStyle}>Família</span>
+        </Link>
 
-        {/* Perfil */}
-        <button onClick={() => setShowProfile(true)} aria-label="Perfil"
-          style={{
-            flex:1, height:54, background:"none",
-            display:"flex", flexDirection:"column",
-            alignItems:"center", justifyContent:"center", gap:3,
-            border:"none", cursor:"pointer",
-            color: showProfile ? C.pink : C.muted,
-            transition:"color .2s", fontFamily:"inherit",
-          }}>
+        <Link href="/dashboard/achievements" style={linkStyle("/dashboard/achievements")}>
+          <Trophy size={22} weight={path === "/dashboard/achievements" ? "fill" : "regular"} />
+          <span style={labelStyle}>Conquistas</span>
+        </Link>
+
+        <button onClick={() => setShowProfile(true)} style={{
+          flex:1, height:54, background:"none",
+          display:"flex", flexDirection:"column",
+          alignItems:"center", justifyContent:"center",
+          gap:3, border:"none", cursor:"pointer",
+          color: showProfile ? C.pink : C.muted,
+          transition:"color .2s", fontFamily:"inherit",
+        }}>
           <User size={22} weight="regular" />
-          <span style={{ fontSize:9, fontWeight:600, fontFamily:"'Space Grotesk',sans-serif" }}>
-            Perfil
-          </span>
+          <span style={labelStyle}>Perfil</span>
         </button>
 
       </nav>
@@ -108,4 +89,3 @@ export function BottomNav() {
     </>
   );
 }
-
