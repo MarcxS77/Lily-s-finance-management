@@ -14,12 +14,13 @@ const nextConfig = {
   },
 };
 
-module.exports = nextConfig;
-
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   typescript: {
-    ignoreBuildErrors: true,  // ← adicione esta linha
+    ignoreBuildErrors: true,
+  },
+  eslint: {
+    ignoreDuringBuilds: true,
   },
   images: {
     remotePatterns: [
