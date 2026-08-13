@@ -5,10 +5,10 @@ import { useState } from "react";
 import { C, APP_NAME, APP_EMOJI } from "@/lib/constants";
 
 const FEATURES = [
-  { emoji:"ðŸŒ¸", text:"Dashboard de saÃºde financeira personalizado" },
-  { emoji:"ðŸ“Š", text:"AnÃ¡lise de gastos fÃºteis e essenciais"       },
-  { emoji:"ðŸ†", text:"Sistema de conquistas e evoluÃ§Ã£o gamificada"  },
-  { emoji:"ðŸ’°", text:"Controle de entradas e saÃ­das do mÃªs"         },
+  { emoji:"🌸", text:"Dashboard de saúde financeira personalizado" },
+  { emoji:"📊", text:"Análise de gastos fúteis e essenciais" },
+  { emoji:"🏆", text:"Sistema de conquistas e evolução gamificada" },
+  { emoji:"💰", text:"Controle de entradas e saídas do mês" },
 ];
 
 export default function LoginPage() {
