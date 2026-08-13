@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import { C, brl } from "@/lib/constants";
 

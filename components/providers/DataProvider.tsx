@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import { createContext, useContext, useState, useTransition, type ReactNode } from "react";
 import { addTransaction, deleteTransaction, addIncome, deleteIncome } from "@/lib/actions";

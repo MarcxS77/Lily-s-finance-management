@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import { useState } from "react";
 import { C, APP_NAME, brl } from "@/lib/constants";

@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import { useData } from "@/components/providers/DataProvider";
 import { C, BADGES, LEVELS } from "@/lib/constants";

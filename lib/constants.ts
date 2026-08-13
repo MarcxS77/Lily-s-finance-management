@@ -1,4 +1,4 @@
-﻿import type { Category, Badge } from "@/types/database";
+import type { Category, Badge } from "@/types/database";
 
 // â”€â”€ Palette â€” Lilys (dark rose/pink) â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 export const C = {

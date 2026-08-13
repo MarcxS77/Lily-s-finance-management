@@ -1,4 +1,4 @@
-﻿import { redirect } from "next/navigation";
+import { redirect } from "next/navigation";
 import { createClient } from "@/lib/supabase/server";
 import { DataProvider } from "@/components/providers/DataProvider";
 import { BottomNav } from "@/components/BottomNav";

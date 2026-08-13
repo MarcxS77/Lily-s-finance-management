@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import { useState } from "react";
 import { C, CATEGORIES, INCOME_CATS } from "@/lib/constants";
