@@ -23,26 +23,26 @@ export const APP_EMOJI = "🌸";
 
 export const CATEGORIES: Category[] = [
   { id:"alimentacao", label:"Alimentação",  emoji:"🍔", color:"#FF6B6B", futile:false },
-  { id:"transporte",  label:"Transporte",              emoji:"🚗", color:"#FBBF24", futile:false },
-  { id:"moradia",     label:"Moradia",                 emoji:"🏠", color:"#60A5FA", futile:false },
-  { id:"saude",       label:"Saúde",              emoji:"💊", color:"#34D399", futile:false },
-  { id:"educacao",    label:"Educação",      emoji:"📚", color:"#22D3EE", futile:false },
-  { id:"contas",      label:"Contas",                  emoji:"⚡",       color:"#F59E0B", futile:false },
-  { id:"lazer",       label:"Lazer",                   emoji:"🎬", color:"#A78BFA", futile:true  },
-  { id:"roupas",      label:"Roupas",                  emoji:"👗", color:"#F9A8D4", futile:true  },
-  { id:"compras",     label:"Compras",                 emoji:"🛒", color:"#FB7185", futile:true  },
-  { id:"bar",         label:"Bar/Balada",              emoji:"🍹", color:"#86EFAC", futile:true  },
-  { id:"cafe",        label:"Café/Lanches",       emoji:"☕",       color:"#C084FC", futile:true  },
-  { id:"games",       label:"Games/Apps",              emoji:"🎮", color:"#FB923C", futile:true  },
+  { id:"transporte",  label:"Transporte",   emoji:"🚗", color:"#FBBF24", futile:false },
+  { id:"moradia",     label:"Moradia",      emoji:"🏠", color:"#60A5FA", futile:false },
+  { id:"saude",       label:"Saúde",        emoji:"💊", color:"#34D399", futile:false },
+  { id:"educacao",    label:"Educação",     emoji:"📚", color:"#22D3EE", futile:false },
+  { id:"contas",      label:"Contas",       emoji:"⚡", color:"#F59E0B", futile:false },
+  { id:"lazer",       label:"Lazer",        emoji:"🎬", color:"#A78BFA", futile:true  },
+  { id:"roupas",      label:"Roupas",       emoji:"👗", color:"#F9A8D4", futile:true  },
+  { id:"compras",     label:"Compras",      emoji:"🛒", color:"#FB7185", futile:true  },
+  { id:"bar",         label:"Bar/Balada",   emoji:"🍹", color:"#86EFAC", futile:true  },
+  { id:"cafe",        label:"Café/Lanches", emoji:"☕", color:"#C084FC", futile:true  },
+  { id:"games",       label:"Games/Apps",   emoji:"🎮", color:"#FB923C", futile:true  },
 ];
 
 export const INCOME_CATS = [
-  { id:"salario",      label:"Salário",           emoji:"💼" },
-  { id:"freelance",    label:"Freelance",              emoji:"💻" },
-  { id:"investimento", label:"Investimentos",          emoji:"📈" },
-  { id:"presente",     label:"Presente",               emoji:"🎁" },
-  { id:"aluguel",      label:"Aluguel recebido",       emoji:"🏠" },
-  { id:"outro",        label:"Outro",                  emoji:"➕"       },
+  { id:"salario",      label:"Salário",         emoji:"💼" },
+  { id:"freelance",    label:"Freelance",       emoji:"💻" },
+  { id:"investimento", label:"Investimentos",   emoji:"📈" },
+  { id:"presente",     label:"Presente",        emoji:"🎁" },
+  { id:"aluguel",      label:"Aluguel recebido",emoji:"🏠" },
+  { id:"outro",        label:"Outro",           emoji:"➕" },
 ];
 
 export const getCat = (id: string) =>
@@ -52,24 +52,24 @@ export const getIncomeCat = (id: string) =>
   INCOME_CATS.find(c => c.id === id) ?? INCOME_CATS[INCOME_CATS.length - 1];
 
 export const BADGES: Badge[] = [
-  { id:"first_entry",   emoji:"📝", title:"Primeiro Passo",     desc:"Cadastrou o primeiro gasto",           xp:50  },
-  { id:"first_income",  emoji:"💰", title:"Primeira Entrada",   desc:"Registrou sua primeira receita",       xp:50  },
-  { id:"streak_7",      emoji:"🔥", title:"7 Dias de Fogo",     desc:"7 dias consecutivos registrando",      xp:100 },
-  { id:"streak_14",     emoji:"⚡",        title:"14 Dias Imparavel",  desc:"14 dias consecutivos registrando",     xp:200 },
-  { id:"streak_30",     emoji:"🌕", title:"Mes Completo",       desc:"30 dias consecutivos registrando",     xp:400 },
-  { id:"goal_hit",      emoji:"🎯", title:"Meta Atingida",      desc:"Ficou abaixo do orcamento no mes",     xp:250 },
-  { id:"cut_futile_20", emoji:"✂️", title:"Corte Inteligente",  desc:"Reduziu gastos futeis em 20%",         xp:150 },
-  { id:"positive_bal",  emoji:"🌸", title:"Saldo Positivo",     desc:"Fechou o mes com saldo positivo",      xp:300 },
-  { id:"investor",      emoji:"📈", title:"Investidora",        desc:"Registrou entrada de investimento",    xp:200 },
-  { id:"perfect_month", emoji:"⭐",       title:"Mes Perfeito",       desc:"Todas categorias abaixo do orcamento", xp:500 },
-  { id:"tx_50",         emoji:"🎓", title:"Organizadora Pro",   desc:"Classificou 50 transacoes",            xp:100 },
-  { id:"diamond_3",     emoji:"💎", title:"Diamante",           desc:"3 meses consecutivos com meta batida", xp:600 },
+  { id:"first_entry",   emoji:"📝", title:"Primeiro Passo",    desc:"Cadastrou o primeiro gasto",            xp:50  },
+  { id:"first_income",  emoji:"💰", title:"Primeira Entrada",  desc:"Registrou sua primeira receita",        xp:50  },
+  { id:"streak_7",      emoji:"🔥", title:"7 Dias de Fogo",    desc:"7 dias consecutivos registrando",       xp:100 },
+  { id:"streak_14",     emoji:"⚡", title:"14 Dias Imparável", desc:"14 dias consecutivos registrando",      xp:200 },
+  { id:"streak_30",     emoji:"🌕", title:"Mês Completo",      desc:"30 dias consecutivos registrando",      xp:400 },
+  { id:"goal_hit",      emoji:"🎯", title:"Meta Atingida",     desc:"Ficou abaixo do orçamento no mês",      xp:250 },
+  { id:"cut_futile_20", emoji:"✂️", title:"Corte Inteligente", desc:"Reduziu gastos fúteis em 20%",          xp:150 },
+  { id:"positive_bal",  emoji:"🌸", title:"Saldo Positivo",    desc:"Fechou o mês com saldo positivo",       xp:300 },
+  { id:"investor",      emoji:"📈", title:"Investidora",       desc:"Registrou entrada de investimento",     xp:200 },
+  { id:"perfect_month", emoji:"⭐", title:"Mês Perfeito",      desc:"Todas categorias abaixo do orçamento",  xp:500 },
+  { id:"tx_50",         emoji:"🎓", title:"Organizadora Pro",  desc:"Classificou 50 transações",             xp:100 },
+  { id:"diamond_3",     emoji:"💎", title:"Diamante",          desc:"3 meses consecutivos com meta batida",  xp:600 },
 ];
 
 export const LEVELS = [
   { name:"Iniciante",       icon:"🌱", minXP:0    },
   { name:"Aprendiz",        icon:"🌸", minXP:200  },
-  { name:"Consciente",      icon:"👁️", minXP:500  },
+  { name:"Consciente",      icon:"👁️",  minXP:500  },
   { name:"Planejadora",     icon:"📋", minXP:900  },
   { name:"Estrategista",    icon:"🧩", minXP:1400 },
   { name:"Especialista",    icon:"💎", minXP:2000 },
