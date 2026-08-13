@@ -4,13 +4,6 @@ import { createClient } from "@/lib/supabase/client";
 import { useState } from "react";
 import { C, APP_NAME } from "@/lib/constants";
 
-const FEATURES = [
-  "Dashboard de saude financeira personalizado",
-  "Analise de gastos futeis e essenciais",
-  "Sistema de conquistas e evolucao gamificada",
-  "Controle de entradas e saidas do mes",
-];
-
 export default function LoginPage() {
   const [loading, setLoading] = useState(false);
   const supabase = createClient();
@@ -36,10 +29,10 @@ export default function LoginPage() {
     }}>
       <div style={{ textAlign:"center", marginBottom:48 }}>
         <div style={{
-          width:80, height:80, borderRadius:24,
+          width:80, height:80, borderRadius:24, margin:"0 auto 20px",
           background:`linear-gradient(135deg,${C.pinkDk},${C.pink})`,
           display:"flex", alignItems:"center", justifyContent:"center",
-          fontSize:36, margin:"0 auto 16px",
+          fontSize:36, fontWeight:700, color:C.bg,
         }}>L</div>
         <h1 style={{ fontSize:40, fontWeight:700, margin:"0 0 8px", color:C.pink }}>
           {APP_NAME}
@@ -50,21 +43,21 @@ export default function LoginPage() {
       </div>
 
       <div style={{
-        width:"100%", maxWidth:340,
-        background:C.card, borderRadius:20,
-        border:`1px solid ${C.border}`,
+        width:"100%", maxWidth:340, background:C.card,
+        borderRadius:20, border:`1px solid ${C.border}`,
         padding:"4px 20px", marginBottom:32,
       }}>
-        {FEATURES.map((f, i) => (
+        {[
+          "Dashboard de saude financeira personalizado",
+          "Analise de gastos futeis e essenciais",
+          "Sistema de conquistas e gamificacao",
+          "Controle de entradas e saidas do mes",
+        ].map((f, i, arr) => (
           <div key={f} style={{
-            display:"flex", alignItems:"center", gap:12,
-            padding:"14px 0",
-            borderBottom: i < FEATURES.length - 1 ? `1px solid ${C.border}` : "none",
+            display:"flex", alignItems:"center", gap:12, padding:"14px 0",
+            borderBottom: i < arr.length - 1 ? `1px solid ${C.border}` : "none",
           }}>
-            <div style={{
-              width:6, height:6, borderRadius:"50%",
-              background:C.pink, flexShrink:0,
-            }}/>
+            <div style={{ width:6, height:6, borderRadius:"50%", background:C.pink, flexShrink:0 }}/>
             <span style={{ fontSize:13, color:C.sub }}>{f}</span>
           </div>
         ))}
@@ -73,20 +66,17 @@ export default function LoginPage() {
       <button onClick={handleGoogle} disabled={loading} style={{
         width:"100%", maxWidth:340,
         display:"flex", alignItems:"center", justifyContent:"center", gap:12,
-        background:"#ffffff", color:"#1a1a1a",
-        borderRadius:16, padding:"15px 24px",
-        fontSize:16, fontWeight:600,
-        border:"none", cursor:loading ? "wait" : "pointer",
-        fontFamily:"inherit", opacity:loading ? 0.75 : 1,
-        boxShadow:"0 4px 24px rgba(0,0,0,0.4)",
+        background:"#ffffff", color:"#1a1a1a", borderRadius:16, padding:"15px 24px",
+        fontSize:16, fontWeight:600, border:"none",
+        cursor:loading ? "wait" : "pointer", fontFamily:"inherit",
+        opacity:loading ? 0.75 : 1, boxShadow:"0 4px 24px rgba(0,0,0,0.4)",
       }}>
-        {loading ? "Conectando..." : (
-          <>
-            <GoogleIcon />
-            Entrar com Google
-          </>
-        )}
+        {loading ? "Conectando..." : <><GoogleIcon /> Entrar com Google</>}
       </button>
+
+      <p style={{ fontSize:11, color:C.muted, marginTop:20, textAlign:"center" }}>
+        Dados privados e protegidos.
+      </p>
     </div>
   );
 }
