@@ -1,8 +1,8 @@
-import type { Metadata } from "next";
+﻿import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Lilys — Maturidade Financeira",
-  description: "Controle seus gastos, entradas e conquiste sua independência financeira.",
+  title: "Lilys â€” Maturidade Financeira",
+  description: "Controle seus gastos, entradas e conquiste sua independÃªncia financeira.",
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
@@ -27,3 +27,4 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     </html>
   );
 }
+

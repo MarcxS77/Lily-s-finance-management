@@ -1,4 +1,4 @@
-import { redirect } from "next/navigation";
+﻿import { redirect } from "next/navigation";
 import { createClient } from "@/lib/supabase/server";
 import { DataProvider } from "@/components/providers/DataProvider";
 import { BottomNav } from "@/components/BottomNav";
@@ -25,7 +25,7 @@ export default async function DashboardLayout({ children }: { children: React.Re
 
   return (
     <DataProvider
-      user={{ id:user.id, email:user.email ?? "", name:user.user_metadata?.full_name ?? "Usuária" }}
+      user={{ id:user.id, email:user.email ?? "", name:user.user_metadata?.full_name ?? "UsuÃ¡ria" }}
       initialProfile={profileRes.data ?? null}
       initialTransactions={(txRes.data    ?? []) as Transaction[]}
       initialIncomes={     (incomeRes.data ?? []) as IncomeEntry[]}
@@ -44,3 +44,4 @@ export default async function DashboardLayout({ children }: { children: React.Re
     </DataProvider>
   );
 }
+

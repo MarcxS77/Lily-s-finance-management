@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { createContext, useContext, useState, useTransition, type ReactNode } from "react";
 import { addTransaction, deleteTransaction, addIncome, deleteIncome } from "@/lib/actions";
@@ -37,7 +37,7 @@ interface AddIncomeForm {
   amount: number; description: string; category: string; date: string;
 }
 
-// ── Valor padrão seguro (evita crash quando fora do Provider) ─────────────────
+// â”€â”€ Valor padrÃ£o seguro (evita crash quando fora do Provider) â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 const EMPTY_USER: AppUser = { id: "", email: "", name: "" };
 const noop = async () => {};
 
@@ -54,7 +54,7 @@ const DEFAULT_VALUE: DataContextValue = {
 
 const DataContext = createContext<DataContextValue>(DEFAULT_VALUE);
 
-// ── Provider ──────────────────────────────────────────────────────────────────
+// â”€â”€ Provider â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 export function DataProvider({
   children, user,
   initialProfile, initialTransactions,
@@ -72,7 +72,7 @@ export function DataProvider({
   const [incomes,      setIncomes]      = useState(initialIncomes);
   const [isPending,    startTransition]  = useTransition();
 
-  // ── Computed ─────────────────────────────────────────────────────────────────
+  // â”€â”€ Computed â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
   const total       = transactions.reduce((s, t) => s + t.amount, 0);
   const futiles     = transactions.filter(t => t.futile).reduce((s, t) => s + t.amount, 0);
   const essential   = total - futiles;
@@ -88,7 +88,7 @@ export function DataProvider({
   const xp          = BADGES.filter(b => unlockedSet.has(b.id)).reduce((s, b) => s + b.xp, 0);
   const levelInfo   = getLevelInfo(xp);
 
-  // ── Actions ───────────────────────────────────────────────────────────────────
+  // â”€â”€ Actions â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
   const addTx = async (form: AddTxForm) => {
     const opt: Transaction = {
       id: `opt-${Date.now()}`, user_id: user.id,
@@ -154,7 +154,8 @@ export function DataProvider({
   );
 }
 
-// ── Hook — nunca lança erro, retorna estado seguro se fora do Provider ─────────
+// â”€â”€ Hook â€” nunca lanÃ§a erro, retorna estado seguro se fora do Provider â”€â”€â”€â”€â”€â”€â”€â”€â”€
 export function useData(): DataContextValue {
   return useContext(DataContext);
 }
+

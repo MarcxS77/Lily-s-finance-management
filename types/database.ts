@@ -1,4 +1,4 @@
-export type Database = {
+﻿export type Database = {
   public: {
     Tables: {
       profiles: {
@@ -148,3 +148,4 @@ export type Badge = {
 };
 
 export type CategoryData = Category & { value: number };
+

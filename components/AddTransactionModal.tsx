@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { useState } from "react";
 import { C, CATEGORIES, INCOME_CATS } from "@/lib/constants";
@@ -53,7 +53,7 @@ export function AddTransactionModal({ onClose }: Props) {
             background:C.raised, color:C.sub, borderRadius:10,
             width:32, height:32, display:"flex", alignItems:"center",
             justifyContent:"center", border:"none", cursor:"pointer", fontFamily:"inherit",
-          }}>✕</button>
+          }}>âœ•</button>
         </div>
 
         {/* Mode Toggle */}
@@ -62,8 +62,8 @@ export function AddTransactionModal({ onClose }: Props) {
           background:C.raised, borderRadius:14, padding:4, marginBottom:16,
         }}>
           {([
-            { id:"expense" as Mode, label:"💸 Gasto",   color:C.coral },
-            { id:"income"  as Mode, label:"💰 Entrada",  color:C.pink  },
+            { id:"expense" as Mode, label:"ðŸ’¸ Gasto",   color:C.coral },
+            { id:"income"  as Mode, label:"ðŸ’° Entrada",  color:C.pink  },
           ]).map(m => (
             <button key={m.id} onClick={() => setMode(m.id)} style={{
               borderRadius:11, padding:"10px 0",
@@ -94,9 +94,9 @@ export function AddTransactionModal({ onClose }: Props) {
 
         {/* Description */}
         <label style={{ display:"block", marginBottom:14 }}>
-          <span style={{ display:"block", fontSize:10, color:C.muted, textTransform:"uppercase", letterSpacing:"0.1em", marginBottom:6 }}>Descrição</span>
+          <span style={{ display:"block", fontSize:10, color:C.muted, textTransform:"uppercase", letterSpacing:"0.1em", marginBottom:6 }}>DescriÃ§Ã£o</span>
           <input type="text"
-            placeholder={mode==="expense" ? "Ex: Almoço no restaurante" : "Ex: Salário de agosto"}
+            placeholder={mode==="expense" ? "Ex: AlmoÃ§o no restaurante" : "Ex: SalÃ¡rio de agosto"}
             value={description} onChange={e => setDesc(e.target.value)}
             style={{
               width:"100%", background:C.raised, border:`1px solid ${C.border}`,
@@ -121,7 +121,7 @@ export function AddTransactionModal({ onClose }: Props) {
         {/* Category grid */}
         <div style={{ marginBottom:22 }}>
           <div style={{ fontSize:10, color:C.muted, textTransform:"uppercase", letterSpacing:"0.1em", marginBottom:10 }}>
-            Categoria {mode==="expense" && selectedCat.futile && <span style={{ color:C.coral, marginLeft:6 }}>⚠️ fútil</span>}
+            Categoria {mode==="expense" && selectedCat.futile && <span style={{ color:C.coral, marginLeft:6 }}>âš ï¸ fÃºtil</span>}
           </div>
           {mode === "expense" ? (
             <div style={{ display:"grid", gridTemplateColumns:"repeat(4,1fr)", gap:8 }}>
@@ -139,7 +139,7 @@ export function AddTransactionModal({ onClose }: Props) {
                     <span style={{ fontSize:8, color:sel?c.color:C.muted, fontWeight:600, textAlign:"center" }}>
                       {c.label.split("/")[0].split(" ")[0]}
                     </span>
-                    {c.futile && <span style={{ fontSize:7, color:C.coral }}>fútil</span>}
+                    {c.futile && <span style={{ fontSize:7, color:C.coral }}>fÃºtil</span>}
                   </button>
                 );
               })}
@@ -179,9 +179,10 @@ export function AddTransactionModal({ onClose }: Props) {
           border:"none", cursor:!canSubmit?"not-allowed":"pointer",
           fontFamily:"inherit", transition:"all .2s",
         }}>
-          {isPending ? "Salvando…" : mode==="expense" ? "✓ Registrar Gasto" : "✓ Registrar Entrada"}
+          {isPending ? "Salvandoâ€¦" : mode==="expense" ? "âœ“ Registrar Gasto" : "âœ“ Registrar Entrada"}
         </button>
       </div>
     </div>
   );
 }
+

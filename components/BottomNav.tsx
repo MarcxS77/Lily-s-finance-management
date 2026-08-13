@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
@@ -15,9 +15,9 @@ type Tab = {
 };
 
 const TABS: Tab[] = [
-  { href:"/dashboard",              label:"Início",    Icon:House    },
-  { href:"/dashboard/analytics",    label:"Análise",   Icon:ChartBar },
-  { href:"/dashboard/familia",      label:"Família",   Icon:Users    },
+  { href:"/dashboard",              label:"InÃ­cio",    Icon:House    },
+  { href:"/dashboard/analytics",    label:"AnÃ¡lise",   Icon:ChartBar },
+  { href:"/dashboard/familia",      label:"FamÃ­lia",   Icon:Users    },
   { href:"/dashboard/achievements", label:"Conquistas",Icon:Trophy   },
 ];
 
@@ -54,7 +54,7 @@ export function BottomNav() {
           );
         })}
 
-        {/* Botão central — Adicionar */}
+        {/* BotÃ£o central â€” Adicionar */}
         <button onClick={() => setShowAdd(true)} aria-label="Adicionar"
           style={{
             flex:1, height:48,
@@ -65,7 +65,7 @@ export function BottomNav() {
             margin:"0 4px", boxShadow:`0 4px 16px ${C.pink}45`,
             fontFamily:"inherit", fontSize:20, color:C.bg, fontWeight:700,
           }}>
-          ✦
+          âœ¦
         </button>
 
         {TABS.slice(2,4).map(tab => {
@@ -108,3 +108,4 @@ export function BottomNav() {
     </>
   );
 }
+

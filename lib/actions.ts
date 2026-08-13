@@ -1,9 +1,9 @@
-"use server";
+﻿"use server";
 
 import { createClient } from "@/lib/supabase/server";
 import { revalidatePath } from "next/cache";
 
-// ── Transactions ───────────────────────────────────────────────────────────────
+// â”€â”€ Transactions â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
 export async function addTransaction(formData: {
   category:    string;
@@ -14,7 +14,7 @@ export async function addTransaction(formData: {
 }) {
   const supabase = await createClient();
   const { data: { user } } = await supabase.auth.getUser();
-  if (!user) throw new Error("Não autenticado");
+  if (!user) throw new Error("NÃ£o autenticado");
 
   const { error } = await supabase.from("transactions").insert({
     user_id:     user.id,
@@ -35,7 +35,7 @@ export async function addTransaction(formData: {
 export async function deleteTransaction(id: string) {
   const supabase = await createClient();
   const { data: { user } } = await supabase.auth.getUser();
-  if (!user) throw new Error("Não autenticado");
+  if (!user) throw new Error("NÃ£o autenticado");
 
   const { error } = await supabase.from("transactions").delete().eq("id", id).eq("user_id", user.id);
   if (error) throw error;
@@ -44,7 +44,7 @@ export async function deleteTransaction(id: string) {
   revalidatePath("/dashboard/analytics");
 }
 
-// ── Income ─────────────────────────────────────────────────────────────────────
+// â”€â”€ Income â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
 export async function addIncome(formData: {
   amount:      number;
@@ -54,7 +54,7 @@ export async function addIncome(formData: {
 }) {
   const supabase = await createClient();
   const { data: { user } } = await supabase.auth.getUser();
-  if (!user) throw new Error("Não autenticado");
+  if (!user) throw new Error("NÃ£o autenticado");
 
   const { error } = await supabase.from("income_entries").insert({
     user_id:     user.id,
@@ -73,7 +73,7 @@ export async function addIncome(formData: {
 export async function deleteIncome(id: string) {
   const supabase = await createClient();
   const { data: { user } } = await supabase.auth.getUser();
-  if (!user) throw new Error("Não autenticado");
+  if (!user) throw new Error("NÃ£o autenticado");
 
   const { error } = await supabase.from("income_entries").delete().eq("id", id).eq("user_id", user.id);
   if (error) throw error;
@@ -82,7 +82,7 @@ export async function deleteIncome(id: string) {
   revalidatePath("/dashboard/analytics");
 }
 
-// ── Profile ────────────────────────────────────────────────────────────────────
+// â”€â”€ Profile â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
 export async function updateProfile(data: {
   display_name?:   string;
@@ -91,7 +91,7 @@ export async function updateProfile(data: {
 }) {
   const supabase = await createClient();
   const { data: { user } } = await supabase.auth.getUser();
-  if (!user) throw new Error("Não autenticado");
+  if (!user) throw new Error("NÃ£o autenticado");
 
   const { error } = await supabase.from("profiles").update(data).eq("id", user.id);
   if (error) throw error;
@@ -99,7 +99,7 @@ export async function updateProfile(data: {
   revalidatePath("/dashboard");
 }
 
-// ── Badge Engine ──────────────────────────────────────────────────────────────
+// â”€â”€ Badge Engine â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
 export async function checkAndAwardBadges(userId: string) {
   const supabase = await createClient();
@@ -155,16 +155,16 @@ export async function checkAndAwardBadges(userId: string) {
   }
 }
 
-// ── Family ─────────────────────────────────────────────────────────────────────
+// â”€â”€ Family â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
 export async function createFamily(name: string) {
   const supabase = await createClient();
   const { data: { user } } = await supabase.auth.getUser();
-  if (!user) throw new Error("Não autenticado");
+  if (!user) throw new Error("NÃ£o autenticado");
 
   const { data: family, error: fErr } = await supabase
     .from("families")
-    .insert({ name: name.trim() || "Nossa Família", created_by: user.id })
+    .insert({ name: name.trim() || "Nossa FamÃ­lia", created_by: user.id })
     .select().single();
 
   if (fErr || !family) throw fErr;
@@ -180,9 +180,9 @@ export async function createFamily(name: string) {
 export async function generateFamilyInvite(familyId: string) {
   const supabase = await createClient();
   const { data: { user } } = await supabase.auth.getUser();
-  if (!user) throw new Error("Não autenticado");
+  if (!user) throw new Error("NÃ£o autenticado");
 
-  // Remove convites anteriores deste usuário para esta família
+  // Remove convites anteriores deste usuÃ¡rio para esta famÃ­lia
   await supabase.from("family_invites")
     .delete().eq("family_id", familyId).eq("created_by", user.id);
 
@@ -201,14 +201,14 @@ export async function generateFamilyInvite(familyId: string) {
 export async function joinFamilyByToken(token: string) {
   const supabase = await createClient();
   const { data: { user } } = await supabase.auth.getUser();
-  if (!user) throw new Error("Não autenticado");
+  if (!user) throw new Error("NÃ£o autenticado");
 
   const { data: invite, error } = await supabase
     .from("family_invites")
     .select("family_id, expires_at")
     .eq("token", token).single();
 
-  if (error || !invite)                          throw new Error("Convite não encontrado");
+  if (error || !invite)                          throw new Error("Convite nÃ£o encontrado");
   if (new Date(invite.expires_at) < new Date())  throw new Error("Convite expirado");
 
   const { error: pErr } = await supabase
@@ -222,8 +222,9 @@ export async function joinFamilyByToken(token: string) {
 export async function leaveFamily() {
   const supabase = await createClient();
   const { data: { user } } = await supabase.auth.getUser();
-  if (!user) throw new Error("Não autenticado");
+  if (!user) throw new Error("NÃ£o autenticado");
 
   await supabase.from("profiles").update({ family_id: null }).eq("id", user.id);
   revalidatePath("/dashboard/familia");
 }
+

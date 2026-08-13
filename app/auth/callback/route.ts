@@ -1,4 +1,4 @@
-import { createServerClient } from "@supabase/ssr";
+﻿import { createServerClient } from "@supabase/ssr";
 import { NextResponse, type NextRequest } from "next/server";
 
 export async function GET(request: NextRequest) {
@@ -12,7 +12,7 @@ export async function GET(request: NextRequest) {
   }
 
   if (code) {
-    // Cria a resposta ANTES — cookies serão setados nela diretamente
+    // Cria a resposta ANTES â€” cookies serÃ£o setados nela diretamente
     const response = NextResponse.redirect(`${origin}${next}`);
 
     const supabase = createServerClient(
@@ -24,7 +24,7 @@ export async function GET(request: NextRequest) {
             return request.cookies.getAll();
           },
           setAll(cookiesToSet) {
-            // ← Seta na RESPOSTA, não no request
+            // â† Seta na RESPOSTA, nÃ£o no request
             cookiesToSet.forEach(({ name, value, options }) =>
               response.cookies.set(name, value, options)
             );
@@ -36,9 +36,10 @@ export async function GET(request: NextRequest) {
     const { error: exchangeError } = await supabase.auth.exchangeCodeForSession(code);
 
     if (!exchangeError) {
-      return response; // Retorna com os cookies de sessão setados
+      return response; // Retorna com os cookies de sessÃ£o setados
     }
   }
 
   return NextResponse.redirect(`${origin}/login`);
 }
+

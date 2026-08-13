@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { useCallback } from "react";
 import { useData } from "@/components/providers/DataProvider";
@@ -303,3 +303,4 @@ ${summaries.length > 0 ? `<div class="st">Historico Mensal</div><table><tr><th>M
     </>
   );
 }
+

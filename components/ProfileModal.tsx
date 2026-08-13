@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { useState } from "react";
 import { C, APP_NAME, brl } from "@/lib/constants";
@@ -65,7 +65,7 @@ export function ProfileModal({ onClose }: Props) {
             background:C.raised, color:C.sub, borderRadius:10,
             width:32, height:32, display:"flex", alignItems:"center",
             justifyContent:"center", border:"none", cursor:"pointer", fontFamily:"inherit",
-          }}>✕</button>
+          }}>âœ•</button>
         </div>
 
         {/* Avatar + name */}
@@ -91,7 +91,7 @@ export function ProfileModal({ onClose }: Props) {
 
         {/* Display name */}
         <label style={{ display:"block", marginBottom:14 }}>
-          <span style={{ display:"block", fontSize:10, color:C.muted, textTransform:"uppercase", letterSpacing:"0.1em", marginBottom:6 }}>Nome de exibição</span>
+          <span style={{ display:"block", fontSize:10, color:C.muted, textTransform:"uppercase", letterSpacing:"0.1em", marginBottom:6 }}>Nome de exibiÃ§Ã£o</span>
           <input type="text" placeholder="Como quer ser chamada?" value={displayName}
             onChange={e => setDisplayName(e.target.value)}
             style={{
@@ -104,7 +104,7 @@ export function ProfileModal({ onClose }: Props) {
 
         {/* Salary */}
         <label style={{ display:"block", marginBottom:14 }}>
-          <span style={{ display:"block", fontSize:10, color:C.muted, textTransform:"uppercase", letterSpacing:"0.1em", marginBottom:6 }}>Salário mensal (R$)</span>
+          <span style={{ display:"block", fontSize:10, color:C.muted, textTransform:"uppercase", letterSpacing:"0.1em", marginBottom:6 }}>SalÃ¡rio mensal (R$)</span>
           <input type="number" inputMode="decimal" placeholder="0,00" value={salary}
             onChange={e => setSalary(e.target.value)}
             style={{
@@ -117,7 +117,7 @@ export function ProfileModal({ onClose }: Props) {
 
         {/* Budget */}
         <label style={{ display:"block", marginBottom:16 }}>
-          <span style={{ display:"block", fontSize:10, color:C.muted, textTransform:"uppercase", letterSpacing:"0.1em", marginBottom:6 }}>Orçamento mensal de gastos (R$)</span>
+          <span style={{ display:"block", fontSize:10, color:C.muted, textTransform:"uppercase", letterSpacing:"0.1em", marginBottom:6 }}>OrÃ§amento mensal de gastos (R$)</span>
           <input type="number" inputMode="decimal" placeholder="0,00" value={budget}
             onChange={e => setBudget(e.target.value)}
             style={{
@@ -135,14 +135,14 @@ export function ProfileModal({ onClose }: Props) {
             border:`1px solid ${savings >= 0 ? C.pink : C.coral}30`,
             borderRadius:14, padding:"12px 14px", marginBottom:20,
           }}>
-            <div style={{ fontSize:11, color:C.muted, marginBottom:4 }}>Previsão de economia mensal</div>
+            <div style={{ fontSize:11, color:C.muted, marginBottom:4 }}>PrevisÃ£o de economia mensal</div>
             <div style={{ fontSize:18, fontWeight:700, color: savings >= 0 ? C.pink : C.coral }}>
               {savings >= 0 ? "+" : ""}{brl(savings)}
             </div>
             <div style={{ fontSize:11, color:C.muted, marginTop:2 }}>
               {savings >= 0
-                ? `${((savings/salaryNum)*100).toFixed(0)}% do salário guardado por mês`
-                : "Orçamento acima do salário — ajuste os valores"}
+                ? `${((savings/salaryNum)*100).toFixed(0)}% do salÃ¡rio guardado por mÃªs`
+                : "OrÃ§amento acima do salÃ¡rio â€” ajuste os valores"}
             </div>
           </div>
         )}
@@ -158,7 +158,7 @@ export function ProfileModal({ onClose }: Props) {
           border:"none", cursor:saving?"wait":"pointer",
           fontFamily:"inherit", marginBottom:12, transition:"all .2s",
         }}>
-          {saving ? "Salvando…" : saved ? "✓ Salvo!" : "Salvar Perfil"}
+          {saving ? "Salvandoâ€¦" : saved ? "âœ“ Salvo!" : "Salvar Perfil"}
         </button>
 
         {/* Sign out */}
@@ -174,3 +174,4 @@ export function ProfileModal({ onClose }: Props) {
     </div>
   );
 }
+

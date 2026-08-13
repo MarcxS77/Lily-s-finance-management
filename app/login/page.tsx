@@ -1,14 +1,14 @@
-"use client";
+﻿"use client";
 
 import { createClient } from "@/lib/supabase/client";
 import { useState } from "react";
 import { C, APP_NAME, APP_EMOJI } from "@/lib/constants";
 
 const FEATURES = [
-  { emoji:"🌸", text:"Dashboard de saúde financeira personalizado" },
-  { emoji:"📊", text:"Análise de gastos fúteis e essenciais"       },
-  { emoji:"🏆", text:"Sistema de conquistas e evolução gamificada"  },
-  { emoji:"💰", text:"Controle de entradas e saídas do mês"         },
+  { emoji:"ðŸŒ¸", text:"Dashboard de saÃºde financeira personalizado" },
+  { emoji:"ðŸ“Š", text:"AnÃ¡lise de gastos fÃºteis e essenciais"       },
+  { emoji:"ðŸ†", text:"Sistema de conquistas e evoluÃ§Ã£o gamificada"  },
+  { emoji:"ðŸ’°", text:"Controle de entradas e saÃ­das do mÃªs"         },
 ];
 
 export default function LoginPage() {
@@ -76,11 +76,11 @@ export default function LoginPage() {
         fontFamily:"inherit", opacity:loading?0.75:1,
         boxShadow:"0 4px 24px rgba(0,0,0,0.4)",
       }}>
-        {loading ? "Conectando…" : <><GoogleIcon /> Entrar com Google</>}
+        {loading ? "Conectandoâ€¦" : <><GoogleIcon /> Entrar com Google</>}
       </button>
 
       <p style={{ fontSize:11, color:C.muted, marginTop:20, textAlign:"center", lineHeight:1.6 }}>
-        Seus dados são privados e protegidos.<br/>
+        Seus dados sÃ£o privados e protegidos.<br/>
         Nunca compartilhamos com terceiros.
       </p>
     </div>
@@ -97,3 +97,4 @@ function GoogleIcon() {
     </svg>
   );
 }
+

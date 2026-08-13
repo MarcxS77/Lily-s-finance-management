@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { useState } from "react";
 import { useData } from "@/components/providers/DataProvider";
@@ -25,7 +25,7 @@ export default function HomePage() {
 
   return (
     <>
-      {/* ── Header ─────────────────────────────────────────────────────── */}
+      {/* â”€â”€ Header â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */}
       <header style={{
         position:"sticky", top:0, zIndex:50,
         background:`${C.bg}ee`, backdropFilter:"blur(14px)",
@@ -44,7 +44,7 @@ export default function HomePage() {
             borderRadius:12, padding:"5px 10px",
             fontSize:11, fontWeight:600, color:C.violet,
           }}>
-            {level.icon} Nível {levelInfo.lvlIdx + 1}
+            {level.icon} NÃ­vel {levelInfo.lvlIdx + 1}
           </div>
         </div>
       </header>
@@ -54,8 +54,8 @@ export default function HomePage() {
         {/* Welcome */}
         {salary > 0 && (
           <div style={{ fontSize:13, color:C.sub, marginBottom:12, textAlign:"center" }}>
-            Olá, <strong style={{ color:C.text }}>{displayName}</strong>!
-            Salário: <strong style={{ color:C.pink }}>{brl(salary)}</strong>
+            OlÃ¡, <strong style={{ color:C.text }}>{displayName}</strong>!
+            SalÃ¡rio: <strong style={{ color:C.pink }}>{brl(salary)}</strong>
           </div>
         )}
 
@@ -71,7 +71,7 @@ export default function HomePage() {
             {[
               { label:"Entradas",   value:brl(totalIncome), color:C.pink  },
               { label:"Gastos",     value:brl(total),       color:C.coral },
-              { label:"Fúteis",     value:brl(futiles),     color:C.amber },
+              { label:"FÃºteis",     value:brl(futiles),     color:C.amber },
               { label:"Essenciais", value:brl(essential),   color:C.sub   },
             ].map(s => (
               <div key={s.label} style={{
@@ -94,17 +94,17 @@ export default function HomePage() {
             borderRadius:16, padding:"12px 14px", marginBottom:14,
             display:"flex", gap:10, alignItems:"flex-start",
           }}>
-            <span style={{ fontSize:20, flexShrink:0 }}>⚠️</span>
+            <span style={{ fontSize:20, flexShrink:0 }}>âš ï¸</span>
             <div>
-              <div style={{ fontSize:13, fontWeight:600, color:C.coral }}>Gastos fúteis em alta</div>
+              <div style={{ fontSize:13, fontWeight:600, color:C.coral }}>Gastos fÃºteis em alta</div>
               <div style={{ fontSize:11, color:C.sub, marginTop:2 }}>
-                {brl(futiles)} ({((futiles/total)*100).toFixed(0)}% do total) são gastos fúteis
+                {brl(futiles)} ({((futiles/total)*100).toFixed(0)}% do total) sÃ£o gastos fÃºteis
               </div>
             </div>
           </div>
         )}
 
-        {/* AI Coach — Em Breve */}
+        {/* AI Coach â€” Em Breve */}
         <section style={{
           background:`linear-gradient(150deg,#1c0a1c,${C.card})`,
           border:`1px solid ${C.pink}25`,
@@ -119,20 +119,20 @@ export default function HomePage() {
           }}>EM BREVE</div>
 
           <div style={{ fontSize:13, fontWeight:700, color:C.pink, marginBottom:4 }}>
-            🤖 Coach Financeiro por IA
+            ðŸ¤– Coach Financeiro por IA
           </div>
           <div style={{ fontSize:11, color:C.muted, marginBottom:12 }}>
-            Análise inteligente personalizada dos seus gastos
+            AnÃ¡lise inteligente personalizada dos seus gastos
           </div>
           <div style={{
             background:`${C.pink}08`, border:`1px solid ${C.pink}15`,
             borderRadius:12, padding:"12px 14px",
           }}>
             <div style={{ fontSize:12, color:C.sub, lineHeight:1.6 }}>
-              🌸 Dicas personalizadas baseadas no seu histórico<br/>
-              💡 Identificação automática de desperdícios<br/>
-              📈 Metas inteligentes de economia<br/>
-              🎯 Planejamento financeiro com IA
+              ðŸŒ¸ Dicas personalizadas baseadas no seu histÃ³rico<br/>
+              ðŸ’¡ IdentificaÃ§Ã£o automÃ¡tica de desperdÃ­cios<br/>
+              ðŸ“ˆ Metas inteligentes de economia<br/>
+              ðŸŽ¯ Planejamento financeiro com IA
             </div>
           </div>
         </section>
@@ -147,7 +147,7 @@ export default function HomePage() {
                 color:      activeList===t ? (t==="incomes"?C.bg:"#fff") : C.muted,
                 border:"none", cursor:"pointer", fontFamily:"inherit", transition:"all .2s",
               }}>
-                {t==="expenses" ? `💸 Gastos (${transactions.length})` : `💰 Entradas (${incomes.length})`}
+                {t==="expenses" ? `ðŸ’¸ Gastos (${transactions.length})` : `ðŸ’° Entradas (${incomes.length})`}
               </button>
             ))}
           </div>
@@ -161,7 +161,7 @@ export default function HomePage() {
 
         {activeList === "expenses" ? (
           transactions.length === 0 ? (
-            <EmptyState text="Nenhum gasto este mês" />
+            <EmptyState text="Nenhum gasto este mÃªs" />
           ) : (
             (showAll ? transactions : transactions.slice(0,5)).map(tx => {
               const cat = getCat(tx.category);
@@ -181,8 +181,8 @@ export default function HomePage() {
                       {tx.description}
                     </div>
                     <div style={{ fontSize:11, color:C.muted, marginTop:2, display:"flex", alignItems:"center", gap:5 }}>
-                      <span>{cat.label}</span><span>·</span><span>{fmtDate(tx.date)}</span>
-                      {tx.futile && <span style={{ fontSize:9, color:C.coral, background:`${C.coral}18`, padding:"1px 5px", borderRadius:5 }}>fútil</span>}
+                      <span>{cat.label}</span><span>Â·</span><span>{fmtDate(tx.date)}</span>
+                      {tx.futile && <span style={{ fontSize:9, color:C.coral, background:`${C.coral}18`, padding:"1px 5px", borderRadius:5 }}>fÃºtil</span>}
                     </div>
                   </div>
                   <div style={{ textAlign:"right", flexShrink:0 }}>
@@ -192,7 +192,7 @@ export default function HomePage() {
                     <button onClick={() => deleteTx(tx.id)} style={{
                       background:"none", border:"none", color:C.muted,
                       fontSize:10, cursor:"pointer", padding:"2px 0", fontFamily:"inherit",
-                    }}>✕</button>
+                    }}>âœ•</button>
                   </div>
                 </div>
               );
@@ -200,7 +200,7 @@ export default function HomePage() {
           )
         ) : (
           incomes.length === 0 ? (
-            <EmptyState text="Nenhuma entrada este mês" sub='Toque em ✦ e escolha "Entrada"' />
+            <EmptyState text="Nenhuma entrada este mÃªs" sub='Toque em âœ¦ e escolha "Entrada"' />
           ) : (
             (showAll ? incomes : incomes.slice(0,5)).map(inc => {
               const cat = getIncomeCat(inc.category);
@@ -220,7 +220,7 @@ export default function HomePage() {
                       {inc.description}
                     </div>
                     <div style={{ fontSize:11, color:C.muted, marginTop:2 }}>
-                      {cat.label} · {fmtDate(inc.date)}
+                      {cat.label} Â· {fmtDate(inc.date)}
                     </div>
                   </div>
                   <div style={{ textAlign:"right", flexShrink:0 }}>
@@ -228,7 +228,7 @@ export default function HomePage() {
                     <button onClick={() => deleteIncomeFn(inc.id)} style={{
                       background:"none", border:"none", color:C.muted,
                       fontSize:10, cursor:"pointer", padding:"2px 0", fontFamily:"inherit",
-                    }}>✕</button>
+                    }}>âœ•</button>
                   </div>
                 </div>
               );
@@ -246,9 +246,10 @@ function EmptyState({ text, sub }: { text: string; sub?: string }) {
       background:C.card, borderRadius:20, border:`1px solid ${C.border}`,
       padding:"32px 16px", textAlign:"center",
     }}>
-      <div style={{ fontSize:32, marginBottom:8 }}>🌸</div>
+      <div style={{ fontSize:32, marginBottom:8 }}>ðŸŒ¸</div>
       <div style={{ fontSize:14, fontWeight:600, color:C.sub }}>{text}</div>
       {sub && <div style={{ fontSize:12, color:C.muted, marginTop:4 }}>{sub}</div>}
     </div>
   );
 }
+
