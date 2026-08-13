@@ -8,7 +8,7 @@
           display_name:   string | null;
           avatar_url:     string | null;
           monthly_budget: number;
-          salary:         number;
+          salary: number; family_id: string | null;
           streak_days:    number;
           streak_record:  number;
           last_entry_date:string | null;
