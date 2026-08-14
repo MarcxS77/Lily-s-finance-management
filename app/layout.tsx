@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: "Lilys — Maturidade Financeira",
-  description: "Controle seus gastos, entradas e conquiste sua independÃªncia financeira.",
+  description: "Controle seus gastos, entradas e conquiste sua independência financeira.",
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
@@ -21,10 +21,19 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         background:"#0E0812",
         fontFamily:"'Space Grotesk', system-ui, sans-serif",
         WebkitFontSmoothing:"antialiased",
+        overflowX:"hidden",
+        minHeight:"100dvh",
       }}>
-        {children}
+        <div style={{
+          maxWidth:430,
+          margin:"0 auto",
+          minHeight:"100dvh",
+          background:"#0E0812",
+          position:"relative",
+        }}>
+          {children}
+        </div>
       </body>
     </html>
   );
 }
-
