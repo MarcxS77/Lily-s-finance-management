@@ -1,7 +1,7 @@
 "use client";
 
-import { createContext, useContext, useState, useTransition, type ReactNode } from "react";
-import { addTransaction, deleteTransaction, addIncome, deleteIncome } from "@/lib/actions";
+import { createContext, useContext, useState, type ReactNode } from "react";
+import { createClient } from "@/lib/supabase/client";
 import { BADGES, CATEGORIES, getLevelInfo } from "@/lib/constants";
 import type { Transaction, IncomeEntry, Profile, UserBadge, MonthlySummary, CategoryData } from "@/types/database";
 
@@ -37,24 +37,19 @@ interface AddIncomeForm {
   amount: number; description: string; category: string; date: string;
 }
 
-// â”€â”€ Valor padrÃ£o seguro (evita crash quando fora do Provider) â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
-const EMPTY_USER: AppUser = { id: "", email: "", name: "" };
 const noop = async () => {};
 
 const DEFAULT_VALUE: DataContextValue = {
-  user: EMPTY_USER, profile: null,
-  transactions: [], incomes: [], badges: [], summaries: [],
-  total: 0, futiles: 0, essential: 0, totalIncome: 0, balance: 0,
-  catData: [], xp: 0,
-  levelInfo: getLevelInfo(0),
-  unlockedSet: new Set(),
-  isPending: false,
-  addTx: noop, deleteTx: noop, addIncomeFn: noop, deleteIncomeFn: noop,
+  user: { id:"", email:"", name:"" }, profile:null,
+  transactions:[], incomes:[], badges:[], summaries:[],
+  total:0, futiles:0, essential:0, totalIncome:0, balance:0,
+  catData:[], xp:0, levelInfo:getLevelInfo(0), unlockedSet:new Set(),
+  isPending:false,
+  addTx:noop, deleteTx:noop, addIncomeFn:noop, deleteIncomeFn:noop,
 };
 
 const DataContext = createContext<DataContextValue>(DEFAULT_VALUE);
 
-// â”€â”€ Provider â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 export function DataProvider({
   children, user,
   initialProfile, initialTransactions,
@@ -70,9 +65,8 @@ export function DataProvider({
 }) {
   const [transactions, setTransactions] = useState(initialTransactions);
   const [incomes,      setIncomes]      = useState(initialIncomes);
-  const [isPending,    startTransition]  = useTransition();
+  const [isPending,    setIsPending]    = useState(false);
 
-  // â”€â”€ Computed â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
   const total       = transactions.reduce((s, t) => s + t.amount, 0);
   const futiles     = transactions.filter(t => t.futile).reduce((s, t) => s + t.amount, 0);
   const essential   = total - futiles;
@@ -88,63 +82,92 @@ export function DataProvider({
   const xp          = BADGES.filter(b => unlockedSet.has(b.id)).reduce((s, b) => s + b.xp, 0);
   const levelInfo   = getLevelInfo(xp);
 
-  // â”€â”€ Actions â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+  const supabase = createClient();
+
   const addTx = async (form: AddTxForm) => {
+    // Optimistic update — aparece imediatamente
     const opt: Transaction = {
-      id: `opt-${Date.now()}`, user_id: user.id,
-      created_at: new Date().toISOString(), ...form,
+      id:`opt-${Date.now()}`, user_id:user.id,
+      created_at:new Date().toISOString(), ...form,
     };
     setTransactions(prev => [opt, ...prev]);
-    startTransition(() => {
-      void (async () => {
-        try { await addTransaction(form); }
-        catch { setTransactions(prev => prev.filter(t => t.id !== opt.id)); }
-      })();
-    });
+    setIsPending(true);
+
+    try {
+      const { data, error } = await supabase
+        .from("transactions")
+        .insert({ user_id:user.id, ...form })
+        .select()
+        .single();
+
+      if (error) throw error;
+
+      // Substitui o optimistic pelo dado real
+      setTransactions(prev => prev.map(t => t.id === opt.id ? (data as Transaction) : t));
+    } catch {
+      // Reverte em caso de erro
+      setTransactions(prev => prev.filter(t => t.id !== opt.id));
+    } finally {
+      setIsPending(false);
+    }
   };
 
   const deleteTx = async (id: string) => {
     const prev = transactions;
     setTransactions(ts => ts.filter(t => t.id !== id));
-    startTransition(() => {
-      void (async () => {
-        try { await deleteTransaction(id); }
-        catch { setTransactions(prev); }
-      })();
-    });
+
+    const { error } = await supabase
+      .from("transactions")
+      .delete()
+      .eq("id", id)
+      .eq("user_id", user.id);
+
+    if (error) setTransactions(prev);
   };
 
   const addIncomeFn = async (form: AddIncomeForm) => {
     const opt: IncomeEntry = {
-      id: `opt-${Date.now()}`, user_id: user.id,
-      created_at: new Date().toISOString(), ...form,
+      id:`opt-${Date.now()}`, user_id:user.id,
+      created_at:new Date().toISOString(), ...form,
     };
     setIncomes(prev => [opt, ...prev]);
-    startTransition(() => {
-      void (async () => {
-        try { await addIncome(form); }
-        catch { setIncomes(prev => prev.filter(i => i.id !== opt.id)); }
-      })();
-    });
+    setIsPending(true);
+
+    try {
+      const { data, error } = await supabase
+        .from("income_entries")
+        .insert({ user_id:user.id, ...form })
+        .select()
+        .single();
+
+      if (error) throw error;
+
+      setIncomes(prev => prev.map(i => i.id === opt.id ? (data as IncomeEntry) : i));
+    } catch {
+      setIncomes(prev => prev.filter(i => i.id !== opt.id));
+    } finally {
+      setIsPending(false);
+    }
   };
 
   const deleteIncomeFn = async (id: string) => {
     const prev = incomes;
     setIncomes(is => is.filter(i => i.id !== id));
-    startTransition(() => {
-      void (async () => {
-        try { await deleteIncome(id); }
-        catch { setIncomes(prev); }
-      })();
-    });
+
+    const { error } = await supabase
+      .from("income_entries")
+      .delete()
+      .eq("id", id)
+      .eq("user_id", user.id);
+
+    if (error) setIncomes(prev);
   };
 
   return (
     <DataContext.Provider value={{
-      user, profile: initialProfile,
+      user, profile:initialProfile,
       transactions, incomes,
-      badges: initialBadges,
-      summaries: initialSummaries,
+      badges:initialBadges, summaries:initialSummaries,
       total, futiles, essential, totalIncome, balance,
       catData, xp, levelInfo, unlockedSet,
       isPending, addTx, deleteTx, addIncomeFn, deleteIncomeFn,
@@ -154,8 +177,6 @@ export function DataProvider({
   );
 }
 
-// â”€â”€ Hook â€” nunca lanÃ§a erro, retorna estado seguro se fora do Provider â”€â”€â”€â”€â”€â”€â”€â”€â”€
 export function useData(): DataContextValue {
   return useContext(DataContext);
 }
-
