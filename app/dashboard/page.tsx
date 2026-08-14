@@ -1,19 +1,22 @@
 "use client";
 
 import { useState } from "react";
+import Image from "next/image";
 import { useData } from "@/components/providers/DataProvider";
 import { SpendingRing } from "@/components/SpendingRing";
 import { C, brl, getCat, getIncomeCat, fmtDate, LEVELS, APP_NAME, APP_EMOJI } from "@/lib/constants";
+import { ProfileModal } from "@/components/ProfileModal";
 
 export default function HomePage() {
   const {
     user, profile, transactions, incomes,
     total, futiles, essential, totalIncome, balance,
-    catData, levelInfo, deleteTx, deleteIncomeFn,
+    levelInfo, deleteTx, deleteIncomeFn,
   } = useData();
 
-  const [showAll,    setShowAll]    = useState(false);
-  const [activeList, setActiveList] = useState<"expenses" | "incomes">("expenses");
+  const [showAll,      setShowAll]      = useState(false);
+  const [activeList,   setActiveList]   = useState<"expenses" | "incomes">("expenses");
+  const [showProfile,  setShowProfile]  = useState(false);
 
   const budget    = profile?.monthly_budget ?? 3000;
   const salary    = profile?.salary ?? 0;
@@ -36,12 +39,31 @@ export default function HomePage() {
             </div>
             <div style={{ fontSize:20, fontWeight:700 }}>{APP_EMOJI} {APP_NAME}</div>
           </div>
-          <div style={{
-            background:`${C.violetDk}28`, border:`1px solid ${C.violet}50`,
-            borderRadius:12, padding:"5px 10px",
-            fontSize:11, fontWeight:600, color:C.violet,
-          }}>
-            {level.icon} Nível {levelInfo.lvlIdx + 1}
+          <div style={{ display:"flex", alignItems:"center", gap:10 }}>
+            <div style={{
+              background:`${C.violetDk}28`, border:`1px solid ${C.violet}50`,
+              borderRadius:12, padding:"5px 10px",
+              fontSize:11, fontWeight:600, color:C.violet,
+            }}>
+              {level.icon} Nível {levelInfo.lvlIdx + 1}
+            </div>
+            <button onClick={() => setShowProfile(true)} style={{
+              background:"none", border:"none", cursor:"pointer", padding:0,
+            }}>
+              {profile?.avatar_url ? (
+                <Image src={profile.avatar_url} alt={user.name}
+                  width={34} height={34}
+                  style={{ borderRadius:99, border:`2px solid ${C.pink}`, display:"block" }}
+                />
+              ) : (
+                <div style={{
+                  width:34, height:34, borderRadius:99,
+                  background:`linear-gradient(135deg,${C.violetDk},${C.pink})`,
+                  display:"flex", alignItems:"center", justifyContent:"center",
+                  fontSize:14, color:"#fff", fontWeight:700,
+                }}>{user.name.charAt(0).toUpperCase()}</div>
+              )}
+            </button>
           </div>
         </div>
       </header>
@@ -186,7 +208,7 @@ export default function HomePage() {
           )
         ) : (
           incomes.length === 0 ? (
-            <EmptyState text="Nenhuma entrada este mês" sub='Toque em ✦ e escolha "Entrada"' />
+            <EmptyState text="Nenhuma entrada este mês" sub='Toque em + e escolha "Entrada"' />
           ) : (
             (showAll ? incomes : incomes.slice(0,5)).map(inc => {
               const cat = getIncomeCat(inc.category);
@@ -222,6 +244,8 @@ export default function HomePage() {
           )
         )}
       </main>
+
+      {showProfile && <ProfileModal onClose={() => setShowProfile(false)} />}
     </>
   );
 }
