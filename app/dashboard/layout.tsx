@@ -25,7 +25,7 @@ export default async function DashboardLayout({ children }: { children: React.Re
 
   return (
     <DataProvider
-      user={{ id:user.id, email:user.email ?? "", name:user.user_metadata?.full_name ?? "UsuÃ¡ria" }}
+      user={{ id:user.id, email:user.email ?? "", name:user.user_metadata?.full_name ?? "Usuária" }}
       initialProfile={profileRes.data ?? null}
       initialTransactions={(txRes.data    ?? []) as Transaction[]}
       initialIncomes={     (incomeRes.data ?? []) as IncomeEntry[]}
@@ -33,10 +33,10 @@ export default async function DashboardLayout({ children }: { children: React.Re
       initialSummaries={   (summariesRes.data ?? []) as MonthlySummary[]}
     >
       <div style={{
-        minHeight:"100dvh", background:"#0E0812",
-        maxWidth:430, margin:"0 auto",
-        fontFamily:"'Space Grotesk', system-ui, sans-serif",
-        color:"#FDF2F8", paddingBottom:80,
+        minHeight:"100dvh",
+        background:"#0E0812",
+        color:"#FDF2F8",
+        paddingBottom:80,
       }}>
         {children}
         <BottomNav />
@@ -44,4 +44,3 @@ export default async function DashboardLayout({ children }: { children: React.Re
     </DataProvider>
   );
 }
-
