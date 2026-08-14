@@ -54,9 +54,11 @@ export function ProfileModal({ onClose }: Props) {
       <div style={{
         background:C.card, borderRadius:"24px 24px 0 0",
         border:`1px solid ${C.border}`,
-        width:"100%", maxWidth:430, margin:"0 auto",
+        width:"100%", maxWidth:"100vw",
         padding:"20px 20px 48px",
         maxHeight:"90dvh", overflowY:"auto",
+        overflowX:"hidden",
+        boxSizing:"border-box",
       }}>
         <div style={{ display:"flex", justifyContent:"space-between", alignItems:"center", marginBottom:20 }}>
           <span style={{ fontSize:18, fontWeight:700 }}>Meu Perfil</span>
