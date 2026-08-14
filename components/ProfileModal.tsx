@@ -43,23 +43,25 @@ export function ProfileModal({ onClose }: Props) {
   const savings   = salaryNum - budgetNum;
 
   return (
-    <div role="dialog" aria-modal="true"
-      style={{
-        position:"fixed", inset:0, zIndex:200,
-        background:"rgba(0,0,0,0.78)", backdropFilter:"blur(10px)",
-        display:"flex", alignItems:"flex-end",
-      }}
-      onClick={e => e.target === e.currentTarget && onClose()}
-    >
-      <div style={{
-        background:C.card, borderRadius:"24px 24px 0 0",
-        border:`1px solid ${C.border}`,
-        width:"100%", maxWidth:"100vw",
-        padding:"20px 20px 48px",
-        maxHeight:"90dvh", overflowY:"auto",
-        overflowX:"hidden",
-        boxSizing:"border-box",
-      }}>
+   <div role="dialog" aria-modal="true"
+  style={{
+    position:"fixed", inset:0, zIndex:200,
+    background:"rgba(0,0,0,0.78)", backdropFilter:"blur(10px)",
+    display:"flex", alignItems:"flex-end",
+    justifyContent:"center",
+  }}
+  onClick={e => e.target === e.currentTarget && onClose()}
+>
+  <div style={{
+    background:C.card, borderRadius:"24px 24px 0 0",
+    border:`1px solid ${C.border}`,
+    width:"100%",
+    maxWidth:430,
+    padding:"20px 20px 48px",
+    maxHeight:"90dvh", overflowY:"auto",
+    overflowX:"hidden",
+    boxSizing:"border-box" as const,
+  }}>
         <div style={{ display:"flex", justifyContent:"space-between", alignItems:"center", marginBottom:20 }}>
           <span style={{ fontSize:18, fontWeight:700 }}>Meu Perfil</span>
           <button onClick={onClose} style={{
