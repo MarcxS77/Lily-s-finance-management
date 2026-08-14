@@ -32,20 +32,21 @@ export function AddTransactionModal({ onClose }: Props) {
   };
 
   return (
-    <div role="dialog" aria-modal="true"
-      style={{
-        position:"fixed", inset:0, zIndex:200,
-        background:"rgba(0,0,0,0.78)", backdropFilter:"blur(10px)",
-        display:"flex", alignItems:"flex-end",
-      }}
-      onClick={e => e.target === e.currentTarget && onClose()}
-    >
-      <div style={{
-        background:C.card, borderRadius:"24px 24px 0 0",
-        border:`1px solid ${C.border}`,
-        width:"100%", maxWidth:430, margin:"0 auto",
-        padding:"20px 20px 48px",
-      }}>
+   <div role="dialog" aria-modal="true"
+  style={{
+    position:"fixed", inset:0, zIndex:200,
+    background:"rgba(0,0,0,0.78)", backdropFilter:"blur(10px)",
+    display:"flex", alignItems:"flex-end", justifyContent:"center",
+  }}
+  onClick={e => e.target === e.currentTarget && onClose()}
+>
+  <div style={{
+    background:C.card, borderRadius:"24px 24px 0 0",
+    border:`1px solid ${C.border}`,
+    width:"min(100%, 430px)",
+    padding:"20px 20px 48px",
+    boxSizing:"border-box" as const,
+  }}>
         <div style={{ display:"flex", justifyContent:"space-between", alignItems:"center", marginBottom:16 }}>
           <span style={{ fontSize:18, fontWeight:700 }}>Novo Registro</span>
           <button onClick={onClose} style={{
