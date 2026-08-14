@@ -29,19 +29,20 @@ export function BottomNav() {
   return (
     <>
       <nav style={{
-        position:"fixed", bottom:0,
-        left:0, right:0,
-        maxWidth:430,
-        margin:"0 auto",
-        zIndex:100,
-        background:`${C.bg}f5`,
-        backdropFilter:"blur(16px)",
-        borderTop:`1px solid ${C.border}`,
-        height:64,
-        display:"flex",
-        alignItems:"center",
-        padding:"0 4px",
-      }}>
+  position:"fixed", bottom:0,
+  left:0, right:0,
+  maxWidth:430,
+  margin:"0 auto",
+  zIndex:100,
+  background:`${C.bg}f5`,
+  backdropFilter:"blur(16px)",
+  borderTop:`1px solid ${C.border}`,
+  height:64,
+  display:"flex",
+  alignItems:"center",
+  justifyContent:"space-around",
+  padding:"0 8px",
+}}>
 
         <Link href="/dashboard" style={linkStyle("/dashboard")}>
           <House size={22} weight={path === "/dashboard" ? "fill" : "regular"} />
@@ -76,17 +77,18 @@ export function BottomNav() {
           <span style={labelStyle}>Conquistas</span>
         </Link>
 
-        <button onClick={() => setShowProfile(true)} style={{
-          flex:1, height:54, background:"none",
-          display:"flex", flexDirection:"column",
-          alignItems:"center", justifyContent:"center",
-          gap:3, border:"none", cursor:"pointer",
-          color: showProfile ? C.pink : C.muted,
-          transition:"color .2s", fontFamily:"inherit",
-        }}>
-          <User size={22} weight="regular" />
-          <span style={labelStyle}>Perfil</span>
-        </button>
+       <button onClick={() => setShowAdd(true)} aria-label="Adicionar"
+  style={{
+    width:56, height:48, flexShrink:0,
+    background:`linear-gradient(135deg,${C.pinkDk},${C.pink})`,
+    borderRadius:14, display:"flex",
+    alignItems:"center", justifyContent:"center",
+    border:"none", cursor:"pointer",
+    boxShadow:`0 4px 16px ${C.pink}45`,
+    fontFamily:"inherit", fontSize:24, color:C.bg, fontWeight:700,
+  }}>
+  +
+</button>
 
       </nav>
 
