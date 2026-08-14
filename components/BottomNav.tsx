@@ -13,7 +13,12 @@ export function BottomNav() {
   const [showAdd,     setShowAdd]     = useState(false);
   const [showProfile, setShowProfile] = useState(false);
 
-  const linkStyle = (href: string): React.CSSProperties => ({
+  const labelStyle: React.CSSProperties = {
+    fontSize:9, fontWeight:600,
+    fontFamily:"'Space Grotesk', sans-serif",
+  };
+
+  const navItem = (href: string): React.CSSProperties => ({
     flex:1, height:54, textDecoration:"none",
     display:"flex", flexDirection:"column",
     alignItems:"center", justifyContent:"center",
@@ -21,18 +26,12 @@ export function BottomNav() {
     transition:"color .2s",
   });
 
-  const labelStyle: React.CSSProperties = {
-    fontSize:9, fontWeight:600,
-    fontFamily:"'Space Grotesk', sans-serif",
-  };
-
   return (
     <>
       <nav style={{
         position:"fixed", bottom:0,
         left:0, right:0,
-        maxWidth:430,
-        margin:"0 auto",
+        maxWidth:430, margin:"0 auto",
         zIndex:100,
         background:`${C.bg}f5`,
         backdropFilter:"blur(16px)",
@@ -40,54 +39,60 @@ export function BottomNav() {
         height:64,
         display:"flex",
         alignItems:"center",
-        justifyContent:"space-around",
-        padding:"0 8px",
+        padding:"0 6px",
       }}>
 
-        <Link href="/dashboard" style={linkStyle("/dashboard")}>
-          <House size={22} weight={path === "/dashboard" ? "fill" : "regular"} />
-          <span style={labelStyle}>Início</span>
-        </Link>
+        {/* Lado esquerdo — 2 itens */}
+        <div style={{ flex:1, display:"flex", alignItems:"center" }}>
+          <Link href="/dashboard" style={navItem("/dashboard")}>
+            <House size={22} weight={path==="/dashboard"?"fill":"regular"} />
+            <span style={labelStyle}>Início</span>
+          </Link>
+          <Link href="/dashboard/analytics" style={navItem("/dashboard/analytics")}>
+            <ChartBar size={22} weight={path==="/dashboard/analytics"?"fill":"regular"} />
+            <span style={labelStyle}>Análise</span>
+          </Link>
+        </div>
 
-        <Link href="/dashboard/analytics" style={linkStyle("/dashboard/analytics")}>
-          <ChartBar size={22} weight={path === "/dashboard/analytics" ? "fill" : "regular"} />
-          <span style={labelStyle}>Análise</span>
-        </Link>
-
+        {/* Botão central — exatamente no meio */}
         <button onClick={() => setShowAdd(true)} aria-label="Adicionar"
           style={{
-            width:56, height:48, flexShrink:0,
+            flexShrink:0,
+            width:54, height:54,
             background:`linear-gradient(135deg,${C.pinkDk},${C.pink})`,
-            borderRadius:14, display:"flex",
-            alignItems:"center", justifyContent:"center",
+            borderRadius:18,
+            display:"flex", alignItems:"center", justifyContent:"center",
             border:"none", cursor:"pointer",
-            boxShadow:`0 4px 16px ${C.pink}45`,
-            fontFamily:"inherit", fontSize:24, color:C.bg, fontWeight:700,
+            boxShadow:`0 4px 20px ${C.pink}55`,
+            fontFamily:"inherit", fontSize:26, color:C.bg, fontWeight:700,
+            margin:"0 6px",
+            transform:"translateY(-8px)",
           }}>
           +
         </button>
 
-        <Link href="/dashboard/familia" style={linkStyle("/dashboard/familia")}>
-          <Users size={22} weight={path === "/dashboard/familia" ? "fill" : "regular"} />
-          <span style={labelStyle}>Família</span>
-        </Link>
-
-        <Link href="/dashboard/achievements" style={linkStyle("/dashboard/achievements")}>
-          <Trophy size={22} weight={path === "/dashboard/achievements" ? "fill" : "regular"} />
-          <span style={labelStyle}>Conquistas</span>
-        </Link>
-
-        <button onClick={() => setShowProfile(true)} style={{
-          flex:1, height:54, background:"none",
-          display:"flex", flexDirection:"column",
-          alignItems:"center", justifyContent:"center",
-          gap:3, border:"none", cursor:"pointer",
-          color: showProfile ? C.pink : C.muted,
-          transition:"color .2s", fontFamily:"inherit",
-        }}>
-          <User size={22} weight="regular" />
-          <span style={labelStyle}>Perfil</span>
-        </button>
+        {/* Lado direito — 3 itens */}
+        <div style={{ flex:1, display:"flex", alignItems:"center" }}>
+          <Link href="/dashboard/familia" style={navItem("/dashboard/familia")}>
+            <Users size={22} weight={path==="/dashboard/familia"?"fill":"regular"} />
+            <span style={labelStyle}>Família</span>
+          </Link>
+          <Link href="/dashboard/achievements" style={navItem("/dashboard/achievements")}>
+            <Trophy size={22} weight={path==="/dashboard/achievements"?"fill":"regular"} />
+            <span style={labelStyle}>Conquistas</span>
+          </Link>
+          <button onClick={() => setShowProfile(true)} style={{
+            flex:1, height:54, background:"none",
+            display:"flex", flexDirection:"column",
+            alignItems:"center", justifyContent:"center",
+            gap:3, border:"none", cursor:"pointer",
+            color: showProfile ? C.pink : C.muted,
+            transition:"color .2s", fontFamily:"inherit",
+          }}>
+            <User size={22} weight="regular" />
+            <span style={labelStyle}>Perfil</span>
+          </button>
+        </div>
 
       </nav>
 
