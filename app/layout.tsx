@@ -7,7 +7,7 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="pt-BR">
+    <html lang="pt-BR" style={{ overflowX:"hidden" }}>
       <head>
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
@@ -25,11 +25,13 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         minHeight:"100dvh",
       }}>
         <div style={{
+          width:"100%",
           maxWidth:430,
           margin:"0 auto",
           minHeight:"100dvh",
           background:"#0E0812",
           position:"relative",
+          overflowX:"hidden",
         }}>
           {children}
         </div>
