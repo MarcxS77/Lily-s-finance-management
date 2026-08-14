@@ -30,11 +30,17 @@ export function BottomNav() {
     <>
       <nav style={{
         position:"fixed", bottom:0,
-        left:"50%", transform:"translateX(-50%)",
-        width:"100%", maxWidth:430, zIndex:100,
-        background:`${C.bg}f5`, backdropFilter:"blur(16px)",
+        left:0, right:0,
+        maxWidth:430,
+        margin:"0 auto",
+        zIndex:100,
+        background:`${C.bg}f5`,
+        backdropFilter:"blur(16px)",
         borderTop:`1px solid ${C.border}`,
-        height:64, display:"flex", alignItems:"center", padding:"0 4px",
+        height:64,
+        display:"flex",
+        alignItems:"center",
+        padding:"0 4px",
       }}>
 
         <Link href="/dashboard" style={linkStyle("/dashboard")}>
