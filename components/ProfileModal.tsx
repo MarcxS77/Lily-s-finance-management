@@ -43,20 +43,18 @@ export function ProfileModal({ onClose }: Props) {
   const savings   = salaryNum - budgetNum;
 
   return (
-   <div role="dialog" aria-modal="true"
+  <div role="dialog" aria-modal="true"
   style={{
     position:"fixed", inset:0, zIndex:200,
     background:"rgba(0,0,0,0.78)", backdropFilter:"blur(10px)",
-    display:"flex", alignItems:"flex-end",
-    justifyContent:"center",
+    display:"flex", alignItems:"flex-end", justifyContent:"center",
   }}
   onClick={e => e.target === e.currentTarget && onClose()}
 >
   <div style={{
     background:C.card, borderRadius:"24px 24px 0 0",
     border:`1px solid ${C.border}`,
-    width:"100%",
-    maxWidth:430,
+    width:"min(100%, 430px)",
     padding:"20px 20px 48px",
     maxHeight:"90dvh", overflowY:"auto",
     overflowX:"hidden",
