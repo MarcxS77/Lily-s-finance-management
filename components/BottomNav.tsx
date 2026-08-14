@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
-import { House, ChartBar, Users, Trophy, User } from "@phosphor-icons/react";
+import { House, ChartBar, Users, Trophy } from "@phosphor-icons/react";
 import { C } from "@/lib/constants";
 import { AddTransactionModal } from "./AddTransactionModal";
 import { ProfileModal } from "./ProfileModal";
@@ -42,57 +42,44 @@ export function BottomNav() {
         padding:"0 6px",
       }}>
 
-        {/* Lado esquerdo — 2 itens */}
-        <div style={{ flex:1, display:"flex", alignItems:"center" }}>
-          <Link href="/dashboard" style={navItem("/dashboard")}>
-            <House size={22} weight={path==="/dashboard"?"fill":"regular"} />
-            <span style={labelStyle}>Início</span>
-          </Link>
-          <Link href="/dashboard/analytics" style={navItem("/dashboard/analytics")}>
-            <ChartBar size={22} weight={path==="/dashboard/analytics"?"fill":"regular"} />
-            <span style={labelStyle}>Análise</span>
-          </Link>
-        </div>
+        {/* Esquerda — 2 itens */}
+        <Link href="/dashboard" style={navItem("/dashboard")}>
+          <House size={22} weight={path==="/dashboard"?"fill":"regular"} />
+          <span style={labelStyle}>Início</span>
+        </Link>
 
-        {/* Botão central — exatamente no meio */}
+        <Link href="/dashboard/analytics" style={navItem("/dashboard/analytics")}>
+          <ChartBar size={22} weight={path==="/dashboard/analytics"?"fill":"regular"} />
+          <span style={labelStyle}>Análise</span>
+        </Link>
+
+        {/* Centro — botão + */}
         <button onClick={() => setShowAdd(true)} aria-label="Adicionar"
           style={{
             flexShrink:0,
-            width:54, height:54,
+            width:52, height:52,
             background:`linear-gradient(135deg,${C.pinkDk},${C.pink})`,
-            borderRadius:18,
+            borderRadius:16,
             display:"flex", alignItems:"center", justifyContent:"center",
             border:"none", cursor:"pointer",
             boxShadow:`0 4px 20px ${C.pink}55`,
-            fontFamily:"inherit", fontSize:26, color:C.bg, fontWeight:700,
-            margin:"0 6px",
-            transform:"translateY(-8px)",
+            fontSize:26, color:C.bg, fontWeight:700,
+            margin:"0 8px",
+            transform:"translateY(-6px)",
           }}>
           +
         </button>
 
-        {/* Lado direito — 3 itens */}
-        <div style={{ flex:1, display:"flex", alignItems:"center" }}>
-          <Link href="/dashboard/familia" style={navItem("/dashboard/familia")}>
-            <Users size={22} weight={path==="/dashboard/familia"?"fill":"regular"} />
-            <span style={labelStyle}>Família</span>
-          </Link>
-          <Link href="/dashboard/achievements" style={navItem("/dashboard/achievements")}>
-            <Trophy size={22} weight={path==="/dashboard/achievements"?"fill":"regular"} />
-            <span style={labelStyle}>Conquistas</span>
-          </Link>
-          <button onClick={() => setShowProfile(true)} style={{
-            flex:1, height:54, background:"none",
-            display:"flex", flexDirection:"column",
-            alignItems:"center", justifyContent:"center",
-            gap:3, border:"none", cursor:"pointer",
-            color: showProfile ? C.pink : C.muted,
-            transition:"color .2s", fontFamily:"inherit",
-          }}>
-            <User size={22} weight="regular" />
-            <span style={labelStyle}>Perfil</span>
-          </button>
-        </div>
+        {/* Direita — 2 itens */}
+        <Link href="/dashboard/familia" style={navItem("/dashboard/familia")}>
+          <Users size={22} weight={path==="/dashboard/familia"?"fill":"regular"} />
+          <span style={labelStyle}>Família</span>
+        </Link>
+
+        <Link href="/dashboard/achievements" style={navItem("/dashboard/achievements")}>
+          <Trophy size={22} weight={path==="/dashboard/achievements"?"fill":"regular"} />
+          <span style={labelStyle}>Conquistas</span>
+        </Link>
 
       </nav>
 
