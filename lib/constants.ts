@@ -34,6 +34,7 @@ export const CATEGORIES: Category[] = [
   { id:"bar",         label:"Bar/Balada",   emoji:"🍹", color:"#86EFAC", futile:true  },
   { id:"cafe",        label:"Café/Lanches", emoji:"☕", color:"#C084FC", futile:true  },
   { id:"games",       label:"Games/Apps",   emoji:"🎮", color:"#FB923C", futile:true  },
+  { id:"outros", label:"Outros", emoji:"📌", color:"#94A3B8", futile:false },
 ];
 
 export const INCOME_CATS = [
