@@ -52,8 +52,3 @@ Cole o conteúdo de `supabase/schema.sql` no SQL Editor do Supabase.
 npm run dev
 ```
 
----
-
-## Deploy
-
-O projeto está configurado para deploy automático na Vercel via GitHub.
